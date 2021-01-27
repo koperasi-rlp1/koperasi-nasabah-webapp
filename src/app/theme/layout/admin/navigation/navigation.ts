@@ -26,22 +26,15 @@ export interface Navigation extends NavigationItem {
 }
 
 const NavigationItems = [
-  {
-    id: 'navigation',
-    title: 'Navigation',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
+  
       {
-        id: 'dashboard',
-        title: 'Dashboard',
+        id: 'Home',
+        title: 'Home',
         type: 'item',
         url: '/dashboard/default',
         icon: 'feather icon-home',
         classes: 'nav-item',
-      }
-    ]
-  },
+      },
   {
     id: 'ui-element',
     title: 'UI ELEMENT',
@@ -179,16 +172,6 @@ const NavigationItems = [
         url: 'javascript:',
         classes: 'nav-item disabled',
         icon: 'feather icon-power',
-        external: true
-      },
-      {
-        id: 'buy_now',
-        title: 'Buy Now',
-        type: 'item',
-        icon: 'feather icon-book',
-        classes: 'nav-item',
-        url: 'https://codedthemes.com/item/datta-able-angular/',
-        target: true,
         external: true
       }
     ]
