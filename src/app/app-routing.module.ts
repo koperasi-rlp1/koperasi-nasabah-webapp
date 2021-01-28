@@ -2,19 +2,31 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { AuthComponent } from './theme/layout/auth/auth.component';
+import { AuthGuardService } from './demo/pages/authentication/auth-signin/service/auth-guard/auth-guard.service';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: AuthComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'auth/signin',
+        pathMatch: 'full'
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
+      }
+    ]
+  },
   {
     path: '',
     component: AdminComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'dashboard/default',
-        pathMatch: 'full'
-      },
-      {
         path: 'dashboard',
+        canActivate : [AuthGuardService],
         loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
@@ -36,16 +48,6 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadChildren: () => import('./demo/extra/sample-page/sample-page.module').then(m => m.SamplePageModule)
-      }
-    ]
-  },
-  {
-    path: '',
-    component: AuthComponent,
-    children: [
-      {
-        path: 'auth',
-        loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
       }
     ]
   }

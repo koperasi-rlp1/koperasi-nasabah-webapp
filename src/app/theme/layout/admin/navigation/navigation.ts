@@ -26,7 +26,12 @@ export interface Navigation extends NavigationItem {
 }
 
 const NavigationItems = [
-  
+  {
+    id: 'Menu',
+    title: 'MENU',
+    type: 'group',
+    icon: 'icon-ui',
+    children: [
       {
         id: 'Home',
         title: 'Home',
@@ -34,7 +39,9 @@ const NavigationItems = [
         url: '/dashboard/default',
         icon: 'feather icon-home',
         classes: 'nav-item',
-      },
+      }
+    ]
+  },
   {
     id: 'ui-element',
     title: 'UI ELEMENT',

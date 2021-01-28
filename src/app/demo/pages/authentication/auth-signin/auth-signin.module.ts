@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AuthSigninRoutingModule } from './auth-signin-routing.module';
 import { AuthSigninComponent } from './auth-signin.component';
@@ -7,8 +8,11 @@ import { AuthSigninComponent } from './auth-signin.component';
 @NgModule({
   imports: [
     CommonModule,
-    AuthSigninRoutingModule
+    AuthSigninRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [AuthSigninComponent]
+  declarations: [AuthSigninComponent],
+  providers: []
 })
 export class AuthSigninModule { }
