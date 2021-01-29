@@ -26,10 +26,10 @@ export class AuthService {
           this.toastr.error("Terjadi Kesalahan");
         }
       } else{
-        this.toastr.error("password yang dimasulan salah");
+        this.toastr.error("password yang dimasukan salah");
       }
     } else {
-      this.toastr.error("username yang dimasulan tidak valid");
+      this.toastr.error("username yang dimasukan tidak valid");
     }
     this.loggedIn = (username == "19201180" && this.userPassword.includes(password));
     
@@ -37,7 +37,8 @@ export class AuthService {
 
   logout(){
     this.loggedIn = false;
-    this.router.navigate(["/"]);
+    localStorage.removeItem("Y");
+    this.router.navigate(["/auth/signin"]);
   }
 
   isAuthenticated(){

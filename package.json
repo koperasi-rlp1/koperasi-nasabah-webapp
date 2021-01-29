@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 2000",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -39,6 +39,7 @@
     "rxjs": "~6.5.4",
     "rxjs-compat": "^6.5.4",
     "screenfull": "^4.2.0",
+    "sweetalert2": "^10.14.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

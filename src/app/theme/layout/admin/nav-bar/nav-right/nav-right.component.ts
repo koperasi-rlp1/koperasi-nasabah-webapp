@@ -2,6 +2,12 @@ import {Component, DoCheck, OnInit} from '@angular/core';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {DattaConfig} from '../../../../../app-config';
+import { AuthService } from 'src/app/demo/pages/authentication/auth-signin/service/auth.service';
+
+declare var require;
+const Swal = require('sweetalert2');
+
+
 
 @Component({
   selector: 'app-nav-right',
@@ -35,7 +41,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   public friendId: boolean;
   public dattaConfig: any;
 
-  constructor(config: NgbDropdownConfig) {
+  constructor(config: NgbDropdownConfig, private authService : AuthService) {
     config.placement = 'bottom-right';
     this.visibleUserList = false;
     this.chatMessage = false;
@@ -44,6 +50,7 @@ export class NavRightComponent implements OnInit, DoCheck {
 
   ngOnInit() {
   }
+
 
   onChatToggle(friend_id) {
     this.friendId = friend_id;
@@ -57,4 +64,28 @@ export class NavRightComponent implements OnInit, DoCheck {
       this.dattaConfig['rtl-layout'] = false;
     }
   }
+
+  logout() {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-glow btn-success',
+            cancelButton: 'btn btn-glow btn-danger'
+        },
+        buttonsStyling: false,
+    });
+    swalWithBootstrapButtons.fire({
+        title: 'Keluar dari akun ?',
+        type: 'warning',
+        showCancelButton: true,
+        showCloseButton: true,
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Tidak',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+          this.authService.logout();
+        }
+    });
+  }
+
 }

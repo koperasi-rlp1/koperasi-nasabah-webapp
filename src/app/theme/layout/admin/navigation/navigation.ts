@@ -43,94 +43,102 @@ const NavigationItems = [
     ]
   },
   {
-    id: 'ui-element',
-    title: 'UI ELEMENT',
+    id: 'Activity',
+    title: 'Activity',
     type: 'group',
     icon: 'icon-ui',
     children: [
       {
         id: 'basic',
-        title: 'Component',
+        title: 'Options',
         type: 'collapse',
-        icon: 'feather icon-box',
+        icon: 'feather icon-list',
         children: [
           {
             id: 'button',
-            title: 'Button',
+            title: 'My Item',
             type: 'item',
             url: '/basic/button'
           },
           {
             id: 'badges',
-            title: 'Badges',
+            title: 'Inventories',
             type: 'item',
             url: '/basic/badges'
           },
           {
             id: 'breadcrumb-pagination',
-            title: 'Breadcrumb & Pagination',
+            title: 'Organization',
             type: 'item',
             url: '/basic/breadcrumb-paging'
           },
           {
             id: 'collapse',
-            title: 'Collapse',
+            title: 'Message' + ' (2)' ,
             type: 'item',
             url: '/basic/collapse'
           },
           {
             id: 'tabs-pills',
-            title: 'Tabs & Pills',
+            title: 'Contact Us',
             type: 'item',
             url: '/basic/tabs-pills'
-          },
-          {
-            id: 'typography',
-            title: 'Typography',
-            type: 'item',
-            url: '/basic/typography'
           }
+          // {
+          //   id: 'typography',
+          //   title: 'Typography',
+          //   type: 'item',
+          //   url: '/basic/typography'
+          // }
         ]
       }
     ]
   },
   {
     id: 'forms',
-    title: 'Forms & Tables',
+    title: 'Checkpoint App',
     type: 'group',
     icon: 'icon-group',
     children: [
       {
         id: 'forms-element',
-        title: 'Form Elements',
+        title: 'About',
         type: 'item',
         url: '/forms/basic',
         classes: 'nav-item',
-        icon: 'feather icon-file-text'
-      },
-      {
-        id: 'tables',
-        title: 'Tables',
-        type: 'item',
-        url: '/tables/bootstrap',
-        classes: 'nav-item',
-        icon: 'feather icon-server'
+        icon: 'feather icon-cloud'
       }
+      // {
+      //   id: 'tables',
+      //   title: 'Tables',
+      //   type: 'item',
+      //   url: '/tables/bootstrap',
+      //   classes: 'nav-item',
+      //   icon: 'feather icon-server'
+      // }
     ]
   },
   {
     id: 'chart-maps',
-    title: 'Chart & Maps',
+    title: 'Data',
     type: 'group',
     icon: 'icon-charts',
     children: [
       {
         id: 'charts',
-        title: 'Charts',
+        title: 'My Statistics',
         type: 'item',
         url: '/charts/morris',
         classes: 'nav-item',
-        icon: 'feather icon-pie-chart'
+        icon: 'feather icon-activity'
+      },
+      {
+        id: 'sample-page',
+        title: 'My Note',
+        type: 'item',
+        url: '/sample-page',
+        classes: 'nav-item',
+        icon: 'feather icon-clipboard'
       }
     ]
   },
@@ -148,38 +156,21 @@ const NavigationItems = [
         children: [
           {
             id: 'signup',
-            title: 'Sign up',
+            title: 'Master Register',
             type: 'item',
-            url: '/auth/signup',
+            url: 'coming soon',
             target: true,
             breadcrumbs: false
           },
           {
             id: 'signin',
-            title: 'Sign in',
+            title: 'Login as Master',
             type: 'item',
-            url: '/auth/signin',
+            url: 'coming soon',
             target: true,
             breadcrumbs: false
           }
         ]
-      },
-      {
-        id: 'sample-page',
-        title: 'Sample Page',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'feather icon-sidebar'
-      },
-      {
-        id: 'disabled-menu',
-        title: 'Disabled Menu',
-        type: 'item',
-        url: 'javascript:',
-        classes: 'nav-item disabled',
-        icon: 'feather icon-power',
-        external: true
       }
     ]
   }
