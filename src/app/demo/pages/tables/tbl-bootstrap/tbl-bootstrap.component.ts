@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TableService } from '../service/table.service';
 
 @Component({
   selector: 'app-tbl-bootstrap',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TblBootstrapComponent implements OnInit {
 
-  constructor() { }
+  list : Array<any> = null;
+
+  constructor(private service : TableService) { }
 
   ngOnInit() {
+    this.getItem();
+  }
+
+  getItem(){
+    this.service.findAll().subscribe(data => {
+      this.list = data.body;
+    })
   }
 
 }

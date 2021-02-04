@@ -9,7 +9,8 @@ import {SharedModule} from '../../../../theme/shared/shared.module';
   imports: [
     CommonModule,
     TblBootstrapRoutingModule,
-    SharedModule
+    SharedModule,
+    
   ],
   declarations: [TblBootstrapComponent]
 })

@@ -474,5 +474,10 @@
         </table>
       </div>
     </app-card>
+    <div class="row">
+      <app-card cardTitle="Get From Database" [options]="false" blockClass="table-border-style">
+        <p *ngFor="let data of list">{{data.inventoryName}}</p>
+      </app-card>
+    </div>
   </div>
 </div>

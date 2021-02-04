@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './theme/shared/shared.module';
@@ -22,7 +23,6 @@ import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-se
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { ToastrModule } from 'ngx-toastr';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +43,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule,
@@ -50,7 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgbTooltipModule,
     NgbButtonsModule,
     NgbTabsetModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [NavigationItem],
   bootstrap: [AppComponent]

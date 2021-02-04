@@ -68,7 +68,7 @@ export class NavRightComponent implements OnInit, DoCheck {
   logout() {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-            confirmButton: 'btn btn-glow btn-success',
+            confirmButton: 'btn btn-glow btn-primary',
             cancelButton: 'btn btn-glow btn-danger'
         },
         buttonsStyling: false,

@@ -20,9 +20,14 @@ import '../../../../assets/charts/amchart/worldLow.js';
 })
 export class DefaultComponent implements OnInit {
 
+  name : string;
+
   constructor() { }
 
   ngOnInit() {
+
+    this.name = localStorage.getItem("fullName");
+
     setTimeout(() => {
       const latlong = {};
       latlong['AU'] = {

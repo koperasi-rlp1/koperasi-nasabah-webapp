@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 
 @Injectable({
@@ -11,16 +12,17 @@ export class AuthGuardService implements CanActivate {
 
   constructor(private authService : AuthService, private router : Router, private toastr : ToastrService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
-  Observable<boolean> | Promise<boolean> | boolean{
-    return this.authService.isAuthenticated()
-    .then((authenticated : boolean)=> {
-      if(authenticated){
-        return true;
-      } else {
-        this.toastr.error("Access Denied");
-        this.router.navigate(['/']);
-      }
-    })
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+  Observable<boolean> | Promise<boolean> | boolean {
+      const allowedRoles = next.data.allowedRoles;
+      return this.authService.isAuthorized(allowedRoles)
+      .pipe(map(data => {
+          if(data.roles != null && allowedRoles.some(r => data.roles.includes(r)) && data.isValid){
+              return true;
+          }else{
+            this.toastr.error("Access Denied!!!");
+          }
+      }))
   }
+
 }

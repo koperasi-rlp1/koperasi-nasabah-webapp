@@ -27,7 +27,8 @@ const routes: Routes = [
       {
         path: 'dashboard',
         canActivate : [AuthGuardService],
-        loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./demo/dashboard/dashboard.module').then(m => m.DashboardModule),
+        data: {allowedRoles: ['user']}
       },
       {
         path: 'basic',
