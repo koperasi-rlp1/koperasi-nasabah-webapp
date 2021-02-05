@@ -13,3 +13,8 @@ export class Status{
     token : string;
     roles : string[];
 }
+
+export class StatusChecking{
+    
+    status : string;
+}

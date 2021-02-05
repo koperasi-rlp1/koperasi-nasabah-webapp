@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './service/auth.service';
-import { Status, User } from './service/user';
+import { Status, StatusChecking, User } from './service/user';
 
 @Component({
   selector: 'app-auth-signin',
@@ -36,7 +36,38 @@ export class AuthSigninComponent implements OnInit {
   }
 
   onLogin(){
-    this.login(this.form.value.username, this.form.value.password);
+    this.checkAccount(this.form.value.username, this.form.value.password);
+  }
+
+  checkAccount(username: string, password: string){
+    document.getElementById('login-loader').style.display = 'inline';
+    document.getElementById('loader-text').style.display = 'none';
+    const userAdmin = new User();
+    userAdmin.userName = username;
+    userAdmin.userPassword = password;
+    this.httpKlien.post(environment.urlAuth  + '/auth/check-account', userAdmin
+    ).pipe(map(data => data as StatusChecking))
+    .subscribe( data => {
+        if(data.status !== "Username is not valid"){
+          if(data.status !== "Password is not correct"){
+            if(data.status !== "Account must verified"){
+              this.login(username, password);
+            }else{
+              this._toastr.error("Some Error", data.status);
+          document.getElementById('login-loader').style.display = 'none';
+          document.getElementById('loader-text').style.display = 'inline';
+            }
+          } else{
+            this._toastr.error("Some Error", data.status);
+          document.getElementById('login-loader').style.display = 'none';
+          document.getElementById('loader-text').style.display = 'inline';
+          }
+        }else{
+          this._toastr.error("Some Error", data.status);
+          document.getElementById('login-loader').style.display = 'none';
+          document.getElementById('loader-text').style.display = 'inline';
+        }
+    });
   }
 
   login(username: string, password: string): void{

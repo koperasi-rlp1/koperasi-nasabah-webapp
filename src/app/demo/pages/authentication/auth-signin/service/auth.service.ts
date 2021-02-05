@@ -43,6 +43,13 @@ export class AuthService {
   //   this.loggedIn = (username == "19201180" && this.userPassword.includes(password));
     
   // }
+  public register(value : any){
+    return this.httpKlien.post<any>(`${environment.urlAuth}/regis/save`, value, {observe : 'response'});
+  }
+
+  public verify(value : any){
+    return this.httpKlien.put<any>(`${environment.urlAuth}/regis/verify`, value, {observe : 'response'});
+  }
 
   logout(){
     const token = localStorage.getItem("token").toString();

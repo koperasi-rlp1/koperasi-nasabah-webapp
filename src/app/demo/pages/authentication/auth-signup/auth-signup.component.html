@@ -1,17 +1,23 @@
 <div class="auth-wrapper">
-  <div class="auth-content">
+  <div class="auth-content-2">
     <div class="auth-bg">
       <span class="r"></span>
       <span class="r s"></span>
       <span class="r s"></span>
       <span class="r"></span>
     </div>
-    <div class="card">
+    <div class="card" *ngIf="formNumber == 1">
+      <form [formGroup]="form">
       <div class="card-body text-center">
         <div class="mb-4">
           <i class="feather icon-user-plus auth-icon"></i>
         </div>
         <h3 class="mb-4">Sign up</h3>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="First Name">
+          &nbsp;&nbsp;
+          <input type="text" class="form-control" placeholder="Last Name">
+        </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username">
         </div>
@@ -19,21 +25,74 @@
           <input type="email" class="form-control" placeholder="Email">
         </div>
         <div class="input-group mb-4">
-          <input type="password" class="form-control" placeholder="Password">
+          <div class="input-group">
+            <input [type]="type" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
+            <div *ngIf="seePassword == false" class="input-group-prepend" style="cursor: pointer;">
+              <span class="input-group-text" id="inputGroupPrepend" (click)="showPassword()"><i class="fa fa-eye"></i></span>
+            </div>
+            <div *ngIf="seePassword == true" class="input-group-prepend" style="cursor: pointer;">
+              <span class="input-group-text" id="inputGroupPrepend" (click)="hidePassword()"><i class="fa fa-eye-slash"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-danger text-left mb-4">
+            <input class="form-control" id="confirmPassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
+            <span>must same like password!</span> 
         </div>
         <div class="form-group text-left">
           <div class="checkbox checkbox-fill d-inline">
-            <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-1" checked="">
-            <label for="checkbox-fill-1" class="cr"> Save Details</label>
+            <input formControlName="accept" type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
+            <label for="checkbox-fill-2" class="cr">Accept the terms and regulation</label>
           </div>
+        </div>
+        <button class="btn btn-primary shadow-2 mb-4" (click)="nextForm()" [disabled]="this.form.value.accept == null">Next</button>
+        <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
+      </div>
+      </form>
+    </div>
+    <div class="card" *ngIf="formNumber == 2">
+      <div class="card-body text-center">
+        <div class="mb-4">
+          <i class="feather icon-user-plus auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Sign up</h3>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="First Name">
+          &nbsp;&nbsp;
+          <input type="text" class="form-control" placeholder="Last Name">
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email">
+        </div>
+        <div class="input-group mb-4">
+          <div class="input-group">
+            <input [type]="type" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
+            <div *ngIf="seePassword == false" class="input-group-prepend" style="cursor: pointer;">
+              <span class="input-group-text" id="inputGroupPrepend" (click)="showPassword()"><i class="fa fa-eye"></i></span>
+            </div>
+            <div *ngIf="seePassword == true" class="input-group-prepend" style="cursor: pointer;">
+              <span class="input-group-text" id="inputGroupPrepend" (click)="hidePassword()"><i class="fa fa-eye-slash"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="text-danger text-left mb-4">
+            <input class="form-control" id="confirmPassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
+            <span>must same like password!</span> 
         </div>
         <div class="form-group text-left">
           <div class="checkbox checkbox-fill d-inline">
             <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
-            <label for="checkbox-fill-2" class="cr">Send me the <a href="javascript:"> Newsletter</a> weekly.</label>
+            <label for="checkbox-fill-2" class="cr">Accept the terms and regulation</label>
           </div>
         </div>
-        <button class="btn btn-primary shadow-2 mb-4" disabled>Coming Soon</button>
+        <div class="d-flex">
+          <button class="btn btn-primary shadow-2 mb-4" (click)="prevForm()">Back</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-primary shadow-2 mb-4" (click)="prevForm()">Sumbit</button>
+        </div>
         <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
       </div>
     </div>
