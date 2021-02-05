@@ -14,38 +14,63 @@
         </div>
         <h3 class="mb-4">Sign up</h3>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="First Name">
+          <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
           &nbsp;&nbsp;
-          <input type="text" class="form-control" placeholder="Last Name">
+          <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" formControlName="userName" placeholder="Username">
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-        </div>
-        <div class="input-group mb-4">
-          <div class="input-group">
-            <input [type]="type" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
+            <input [type]="type" formControlName="userPassword" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
             <div *ngIf="seePassword == false" class="input-group-prepend" style="cursor: pointer;">
               <span class="input-group-text" id="inputGroupPrepend" (click)="showPassword()"><i class="fa fa-eye"></i></span>
             </div>
             <div *ngIf="seePassword == true" class="input-group-prepend" style="cursor: pointer;">
               <span class="input-group-text" id="inputGroupPrepend" (click)="hidePassword()"><i class="fa fa-eye-slash"></i></span>
-            </div>
           </div>
         </div>
-        <div class="text-danger text-left mb-4">
-            <input class="form-control" id="confirmPassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
-            <span>must same like password!</span> 
+        <div class="text-left mb-3">
+            <input *ngIf="(form.value.retypePassword != form.value.userPassword && !form.get('retypePassword').touched) || form.value.retypePassword == form.value.userPassword" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword"  type="password" placeholder="Retype Password">
+            <input *ngIf="form.value.retypePassword != form.value.userPassword && form.get('retypePassword').touched" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
+            <span class="text-danger" *ngIf="form.value.retypePassword != form.value.userPassword && form.get('retypePassword').touched">Password doesm't match</span> 
+            <span class="text-success" *ngIf="form.value.retypePassword == form.value.userPassword && form.get('retypePassword').touched">Password confirmed!</span> 
+        </div>
+        <div class="text-left mb-3">
+          <input type="email" class="form-control" formControlName="email" placeholder="Email">
+          <span *ngIf="!form.get('email').valid && form.get('email').touched" class="help-block text-danger">
+            Email tidak Valid
+          </span>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroupPrepend" >{{formatNumber}}</span>
+          </div>
+          <input mask=" 000-0000-00000" formControlName="phoneNumber" class="form-control" id="exampleFormControlInput1" placeholder="Phone Number" [validation]="false">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+          </div>
+          <select class="custom-select" formControlName="gender" id="inputGroupSelect01">
+            <option value='M' >Male</option>
+            <option value='F' >Female</option>
+          </select>
+          &nbsp;&nbsp;
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Birth Date</label>
+          </div>
+          <input class="form-control"  type="date" formControlName="birthDate">
         </div>
         <div class="form-group text-left">
-          <div class="checkbox checkbox-fill d-inline">
-            <input formControlName="accept" type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
-            <label for="checkbox-fill-2" class="cr">Accept the terms and regulation</label>
-          </div>
+          <form [formGroup]="acceptform">
+            <div class="checkbox checkbox-fill d-inline">
+              <input formControlName="accept" [disabled]="!form.value.firstName == null || !form.get('lastName').valid" type="checkbox" name="checkbox-fill-2">
+              <label class="cr">Accept the terms and regulation</label>
+            </div>
+          </form>
         </div>
-        <button class="btn btn-primary shadow-2 mb-4" (click)="nextForm()" [disabled]="this.form.value.accept == null">Next</button>
+        <button class="btn btn-primary shadow-2 mb-4" (click)="nextForm()" [disabled]="this.acceptform.value.accept == false || this.acceptform.value.accept == null">Next</button>
         <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
       </div>
       </form>
