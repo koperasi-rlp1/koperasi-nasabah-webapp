@@ -1,4 +1,4 @@
-<div class="auth-wrapper">
+<div class="auth-wrapper" *ngIf="formNumber == 1">
   <div class="auth-content-2">
     <div class="auth-bg">
       <span class="r"></span>
@@ -6,7 +6,7 @@
       <span class="r s"></span>
       <span class="r"></span>
     </div>
-    <div class="card" *ngIf="formNumber == 1">
+    <div class="card">
       <form [formGroup]="form">
       <div class="card-body text-center">
         <div class="mb-4">
@@ -53,8 +53,8 @@
             <label class="input-group-text" for="inputGroupSelect01">Gender</label>
           </div>
           <select class="custom-select" formControlName="gender" id="inputGroupSelect01">
-            <option value='M' >Male</option>
-            <option value='F' >Female</option>
+            <option value="Male" >Male</option>
+            <option value="Female" >Female</option>
           </select>
           &nbsp;&nbsp;
           <div class="input-group-prepend">
@@ -63,63 +63,52 @@
           <input class="form-control"  type="date" formControlName="birthDate">
         </div>
         <div class="form-group text-left">
-          <form [formGroup]="acceptform">
-            <div class="checkbox checkbox-fill d-inline">
-              <input formControlName="accept" [disabled]="!form.value.firstName == null || !form.get('lastName').valid" type="checkbox" name="checkbox-fill-2">
-              <label class="cr">Accept the terms and regulation</label>
-            </div>
-          </form>
+          <div class="checkbox checkbox-fill d-inline">
+            <input type="checkbox" formControlName="accept" name="checkbox-fill-1" id="checkbox-fill-a1">
+            <label for="checkbox-fill-a1" class="cr"> Accept terms and regulation</label>
+          </div>
         </div>
-        <button class="btn btn-primary shadow-2 mb-4" (click)="nextForm()" [disabled]="this.acceptform.value.accept == false || this.acceptform.value.accept == null">Next</button>
+        <button class="btn btn-primary shadow-2 mb-4" (click)="nextForm()" [disabled]="this.form.value.accept == false || this.form.value.accept == null">Next</button>
         <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
       </div>
       </form>
     </div>
-    <div class="card" *ngIf="formNumber == 2">
+  </div>
+</div>
+<div class="auth-wrapper" *ngIf="formNumber == 2">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
       <div class="card-body text-center">
         <div class="mb-4">
           <i class="feather icon-user-plus auth-icon"></i>
         </div>
-        <h3 class="mb-4">Sign up</h3>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="First Name">
-          &nbsp;&nbsp;
-          <input type="text" class="form-control" placeholder="Last Name">
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username">
-        </div>
-        <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
-        </div>
-        <div class="input-group mb-4">
-          <div class="input-group">
-            <input [type]="type" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
-            <div *ngIf="seePassword == false" class="input-group-prepend" style="cursor: pointer;">
-              <span class="input-group-text" id="inputGroupPrepend" (click)="showPassword()"><i class="fa fa-eye"></i></span>
+        <h3 class="mb-4">Verificate Your Account</h3>
+          <form [formGroup]="acceptform">
+            <div class="text-center mb-3">
+              <p class="text-dark font-weight-bold">{{randomText}}</p>
             </div>
-            <div *ngIf="seePassword == true" class="input-group-prepend" style="cursor: pointer;">
-              <span class="input-group-text" id="inputGroupPrepend" (click)="hidePassword()"><i class="fa fa-eye-slash"></i></span>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" formControlName="verificateCode" placeholder="Follow the random word">
+            </div>
+          </form>
+          <div class="row text-center">
+            <div class="col">
+              <button class="btn btn-primary shadow-2 mb-4" (click)="prevForm()">Back</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-primary shadow-2 mb-4" [disabled]="this.acceptform.value.verificateCode != randomText" (click)="submit()">
+                <span style="display: inline;" id="loader-text">Sign Up</span>
+                <span style="display: none;" id="login-loader"><i class="fa fa-spinner spin" aria-hidden="true"></i></span>
+              </button>
             </div>
           </div>
         </div>
-        <div class="text-danger text-left mb-4">
-            <input class="form-control" id="confirmPassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
-            <span>must same like password!</span> 
-        </div>
-        <div class="form-group text-left">
-          <div class="checkbox checkbox-fill d-inline">
-            <input type="checkbox" name="checkbox-fill-2" id="checkbox-fill-2">
-            <label for="checkbox-fill-2" class="cr">Accept the terms and regulation</label>
-          </div>
-        </div>
-        <div class="d-flex">
-          <button class="btn btn-primary shadow-2 mb-4" (click)="prevForm()">Back</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <button class="btn btn-primary shadow-2 mb-4" (click)="prevForm()">Sumbit</button>
-        </div>
-        <p class="mb-0 text-muted">Already have an account? <a [routerLink]="['/auth/signin']"> Log in</a></p>
-      </div>
     </div>
   </div>
 </div>

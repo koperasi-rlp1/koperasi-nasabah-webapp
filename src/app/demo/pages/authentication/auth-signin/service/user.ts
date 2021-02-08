@@ -5,6 +5,16 @@ export class User{
     groupId : number;
     token : string;
 }
+export class NewUser{
+    firstName : any;
+    lastName : any;
+    userName : any;
+    userPassword : any;
+    gender : CharacterData;
+    email : any;
+    phoneNUmber : any;
+    birthDate : any;
+}
 
 export class Status{
 
