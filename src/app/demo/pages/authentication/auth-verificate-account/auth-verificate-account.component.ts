@@ -11,11 +11,12 @@ declare var require;
 const randomWords = require('random-words');
 
 @Component({
-  selector: 'app-auth-signup',
-  templateUrl: './auth-signup.component.html',
-  styleUrls: ['./auth-signup.component.scss']
+  selector: 'app-auth-verificate-account',
+  templateUrl: './auth-verificate-account.component.html',
+  styleUrls: ['./auth-verificate-account.component.scss']
 })
-export class AuthSignupComponent implements OnInit {
+export class AuthVerificateAccountComponent implements OnInit {
+
 
   form : FormGroup;
   acceptform : FormGroup;
@@ -26,60 +27,30 @@ export class AuthSignupComponent implements OnInit {
   randomText = randomWords(1).toString();
   isLogin = false;
 
+
   constructor(private formBuilder : FormBuilder, 
     private toastr : ToastrService, 
     private renderer : Renderer2, 
     private service : AuthService, 
     private httpKlien : HttpClient,
-    private router : Router) {
-    this.form = this.formBuilder.group({
-      userName: this.formBuilder.control(null, [Validators.required]),
-      userPassword: this.formBuilder.control(null, [Validators.required]),
-      retypePassword: this.formBuilder.control(null, [Validators.required]),
-      firstName: this.formBuilder.control(null, [Validators.required]),
-      lastName: this.formBuilder.control(null, [Validators.required]),
-      gender: this.formBuilder.control(null, [Validators.required]),
-      email: this.formBuilder.control(null, [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      phoneNumber: this.formBuilder.control(null, [Validators.required]),
-      birthDate: this.formBuilder.control(null, [Validators.required]),
-      accept: this.formBuilder.control(null)
-    });
-
-    this.acceptform = this.formBuilder.group({
-      verificateCode : this.formBuilder.control(null)
-    })
-   }
-
-  ngOnInit() {
-    
-  }
-
-  verification(){
-    if(this.form.get("retypePassword").touched && this.form.value.retypePassword != this.form.value.userPassword){
-      console.log("true");
-      document.getElementById("confirmPassword").style.borderColor = "red";
+    private router : Router) { 
+      this.acceptform = this.formBuilder.group({
+        verificateCode : this.formBuilder.control(null)
+      })
     }
+
+  ngOnInit(): void {
   }
 
   submit(){
     document.getElementById('login-loader').style.display = 'inline';
     document.getElementById('loader-text').style.display = 'none';
-    let value = new NewUser();
-    value.firstName = this.form.value.firstName;
-    value.lastName = this.form.value.lastName;
-    value.userName = this.form.value.userName;
-    value.userPassword = this.form.value.userPassword;
-    value.gender = this.form.value.gender;
-    value.email = this.form.value.email;
-    value.phoneNumber = this.formatNumber+this.form.value.phoneNumber;
-    value.birthDate = this.form.value.birthDate;
-    this.service.register(value).subscribe(response => {
       let values = new NewUser();
-      values.userName = this.form.value.userName;
+      values.userName = localStorage.getItem('username');
+      const userPassword = localStorage.getItem('password');
       this.service.verify(values).subscribe(response => {
-        this.checkAccount(value.userName, value.userPassword);
+        this.checkAccount(values.userName, userPassword);
       })
-    })
   }
 
   checkAccount(username: string, password: string){
@@ -122,6 +93,9 @@ export class AuthSignupComponent implements OnInit {
     .subscribe( data => {
         this.isLogin = data.isValid;
         if(this.isLogin){
+
+            localStorage.removeItem('username');
+            localStorage.removeItem('username');
             localStorage.setItem('token', data.token);
             localStorage.setItem('fullName', data.fullName);
             this.toastr.success("Akun Berhasil Terdaftar");
@@ -130,39 +104,13 @@ export class AuthSignupComponent implements OnInit {
             document.getElementById('loader-text').style.display = 'inline';
         } else {
           this.toastr.error("Terjadi kesalahan");
+          localStorage.removeItem('username');
+          localStorage.removeItem('username');
           document.getElementById('login-loader').style.display = 'none';
           document.getElementById('loader-text').style.display = 'inline';
         }
     });
   }
 
-
-  prevForm(){
-    this.formNumber = 1;
-  }
-
-  nextForm(){
-    if(this.form.get("firstName").valid && this.form.get("lastName").valid && this.form.get("userName").valid &&
-    this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid && 
-    this.form.get("email").valid && this.form.get("phoneNumber").valid && this.form.get("birthDate").valid){
-      if(this.form.value.retypePassword != this.form.value.userPassword){
-        this.toastr.error("Verify password must be same");
-      }else {
-        this.formNumber = 2;
-      }
-    } else {
-      this.toastr.error("Form Harus di isi lengkap");
-    }
-  }
-
-  showPassword(){
-    this.seePassword = true;
-    this.type = "text";
-  }
-
-  hidePassword(){
-    this.seePassword = false;
-    this.type = "password";
-  }
 
 }

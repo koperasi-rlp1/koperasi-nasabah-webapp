@@ -12,7 +12,7 @@ export class NewUser{
     userPassword : any;
     gender : CharacterData;
     email : any;
-    phoneNUmber : any;
+    phoneNumber : any;
     birthDate : any;
 }
 

@@ -54,8 +54,11 @@ export class AuthSigninComponent implements OnInit {
               this.login(username, password);
             }else{
               this._toastr.error("Some Error", data.status);
-          document.getElementById('login-loader').style.display = 'none';
-          document.getElementById('loader-text').style.display = 'inline';
+              document.getElementById('login-loader').style.display = 'none';
+              document.getElementById('loader-text').style.display = 'inline';
+              localStorage.setItem('username', userAdmin.userName)
+              localStorage.setItem('password', userAdmin.userPassword)
+              this.router.navigate(['/auth/verificate-account']);
             }
           } else{
             this._toastr.error("Some Error", data.status);

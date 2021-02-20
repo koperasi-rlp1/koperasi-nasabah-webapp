@@ -12,6 +12,10 @@ const routes: Routes = [
       {
         path: 'signin',
         loadChildren: () => import('./auth-signin/auth-signin.module').then(m => m.AuthSigninModule)
+      },
+      {
+        path: 'verificate-account',
+        loadChildren: () => import('./auth-verificate-account/auth-verificate-account.module').then(m => m.AuthVerificateAccountModule)
       }
     ]
   }
