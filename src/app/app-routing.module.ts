@@ -32,23 +32,33 @@ const routes: Routes = [
       },
       {
         path: 'basic',
-        loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then(m => m.UiBasicModule)
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then(m => m.UiBasicModule),
+        data: {allowedRoles: ['user']}
       },
       {
         path: 'forms',
-        loadChildren: () => import('./demo/pages/form-elements/form-elements.module').then(m => m.FormElementsModule)
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/pages/form-elements/form-elements.module').then(m => m.FormElementsModule),
+        data: {allowedRoles: ['user']}
       },
       {
         path: 'tables',
-        loadChildren: () => import('./demo/pages/tables/tables.module').then(m => m.TablesModule)
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/pages/tables/tables.module').then(m => m.TablesModule),
+        data: {allowedRoles: ['user']}
       },
       {
         path: 'charts',
-        loadChildren: () => import('./demo/pages/core-chart/core-chart.module').then(m => m.CoreChartModule)
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/pages/core-chart/core-chart.module').then(m => m.CoreChartModule),
+        data: {allowedRoles: ['user']}
       },
       {
         path: 'sample-page',
-        loadChildren: () => import('./demo/extra/sample-page/sample-page.module').then(m => m.SamplePageModule)
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/extra/sample-page/sample-page.module').then(m => m.SamplePageModule),
+        data: {allowedRoles: ['user']}
       }
     ]
   }
