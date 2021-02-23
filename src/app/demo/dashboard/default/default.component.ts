@@ -26,7 +26,7 @@ export class DefaultComponent implements OnInit {
 
   ngOnInit() {
 
-    this.name = localStorage.getItem("fullName");
+    this.getData();
 
     setTimeout(() => {
       const latlong = {};
@@ -356,6 +356,11 @@ export class DefaultComponent implements OnInit {
       });
 
     }, 500);
+  }
+
+  getData(){
+    const value = JSON.parse(localStorage.getItem("currentLogin"));
+    this.name = value.fullName;
   }
 
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { AuthComponent } from './theme/layout/auth/auth.component';
 import { AuthGuardService } from './demo/pages/authentication/auth-signin/service/auth-guard/auth-guard.service';
+import { UserComponent } from './theme/layout/user/user.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,18 @@ const routes: Routes = [
       {
         path: 'auth',
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
+      }
+    ]
+  }, 
+  {
+    path: '',
+    component: UserComponent,
+    children: [
+      {
+        path: 'user',
+        canActivate : [AuthGuardService],
+        loadChildren: () => import('./demo/pages/user-profile/user-profile.module').then(m => m.UserProfileModule),
+        data: {allowedRoles: ['user']}
       }
     ]
   },

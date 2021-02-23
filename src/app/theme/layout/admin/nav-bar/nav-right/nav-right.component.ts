@@ -36,6 +36,8 @@ const Swal = require('sweetalert2');
   ]
 })
 export class NavRightComponent implements OnInit, DoCheck {
+  name : string = null;
+  userData : any = null;
   public visibleUserList: boolean;
   public chatMessage: boolean;
   public friendId: boolean;
@@ -49,6 +51,15 @@ export class NavRightComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
+
+    this.getData();
+
+  }
+
+  getData(){
+    const value = JSON.parse(localStorage.getItem("currentLogin"));
+    this.userData = value;
+    this.name = value.fullName;
   }
 
 

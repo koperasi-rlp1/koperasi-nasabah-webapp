@@ -47,6 +47,10 @@ export class AuthService {
     return this.httpKlien.post<any>(`${environment.urlAuth}/regis/save`, value, {observe : 'response'});
   }
 
+  public getData(username : any, password : any){
+    return this.httpKlien.get<any>(`${environment.urlAuth}/user-admin/data/user?password=${password}&username=${username}`, {observe : 'response'});
+  }
+
   public verify(value : any){
     return this.httpKlien.put<any>(`${environment.urlAuth}/regis/verify`, value, {observe : 'response'});
   }
@@ -55,7 +59,7 @@ export class AuthService {
     const token = localStorage.getItem("token").toString();
     this.httpKlien.delete(environment.urlAuth + '/auth/logout/' + token).pipe(map(data => data )).subscribe(resp => {
       localStorage.removeItem('token');
-      localStorage.removeItem('fullName');
+      localStorage.removeItem('currentLogin');
       this.router.navigate(["/"]);
     });
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -25,7 +26,8 @@ export class AuthSigninComponent implements OnInit {
     private _toastr: ToastrService,
     private formBuilder: FormBuilder,
     private httpKlien: HttpClient,
-    private router: Router
+    private router: Router,
+    private titleService : Title
   ) { }
 
   ngOnInit() {
@@ -33,6 +35,8 @@ export class AuthSigninComponent implements OnInit {
       username: this.formBuilder.control(null, [Validators.required]),
       password: this.formBuilder.control(null, [Validators.required]),
     });
+
+    this.titleService.setTitle('Welcome to Checkpoint App | Sign In');
   }
 
   onLogin() {
@@ -89,11 +93,13 @@ export class AuthSigninComponent implements OnInit {
         this.isLogin = data.isValid;
         if (this.isLogin) {
           localStorage.setItem('token', data.token);
-          localStorage.setItem('fullName', data.fullName);
           this._toastr.success("Anda Berhasil Login");
           this.router.navigate(['/dashboard/default']);
-          document.getElementById('login-loader').style.display = 'none';
-          document.getElementById('loader-text').style.display = 'inline';
+          this.service.getData( userAdmin.userName, userAdmin.userPassword).subscribe(data =>{
+            localStorage.setItem( "currentLogin", JSON.stringify(data.body));
+            document.getElementById('login-loader').style.display = 'none';
+            document.getElementById('loader-text').style.display = 'inline';
+          })
         } else {
           this._toastr.error("Terjadi kesalahan");
           document.getElementById('login-loader').style.display = 'none';

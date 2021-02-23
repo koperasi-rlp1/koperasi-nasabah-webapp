@@ -22,7 +22,7 @@
           <input type="text" class="form-control" formControlName="userName" placeholder="Username">
         </div>
         <div class="input-group mb-3">
-            <input [type]="type" formControlName="userPassword" class="form-control" id="validationCustomUsername" placeholder="Password" aria-describedby="inputGroupPrepend">
+            <input [type]="type" formControlName="userPassword" class="form-control" id="validationCustomUsername" onpaste="return false;" placeholder="Password" aria-describedby="inputGroupPrepend">
             <div *ngIf="seePassword == false" class="input-group-prepend" style="cursor: pointer;">
               <span class="input-group-text" id="inputGroupPrepend" (click)="showPassword()"><i class="fa fa-eye"></i></span>
             </div>
@@ -31,14 +31,14 @@
           </div>
         </div>
         <div class="text-left mb-3">
-            <input *ngIf="(form.value.retypePassword != form.value.userPassword && !form.get('retypePassword').touched) || form.value.retypePassword == form.value.userPassword" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword"  type="password" placeholder="Retype Password">
-            <input *ngIf="form.value.retypePassword != form.value.userPassword && form.get('retypePassword').touched" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword" style="border: 1px solid red;" type="password" placeholder="Retype Password">
+            <input *ngIf="(form.value.retypePassword != form.value.userPassword && !form.get('retypePassword').touched) || form.value.retypePassword == form.value.userPassword" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword"   onpaste="return false;" type="password" placeholder="Retype Password">
+            <input *ngIf="form.value.retypePassword != form.value.userPassword && form.get('retypePassword').touched" [value]="form.value.retypePassword" class="form-control" id="confirmPassword"  formControlName="retypePassword" style="border: 1px solid red;"  onpaste="return false;" type="password" placeholder="Retype Password">
             <span class="text-danger" *ngIf="form.value.retypePassword != form.value.userPassword && form.get('retypePassword').touched">Password doesm't match</span> 
-            <span class="text-success" *ngIf="form.value.retypePassword == form.value.userPassword && form.get('retypePassword').touched">Password confirmed!</span> 
+            <span class="text-success" *ngIf="form.value.retypePassword == form.value.userPassword && form.get('retypePassword').touched && form.value.userPassword != null">Password confirmed!</span> 
         </div>
         <div class="text-left mb-3">
           <input type="email" class="form-control" formControlName="email" placeholder="Email">
-          <span *ngIf="!form.get('email').valid && form.get('email').touched" class="help-block text-danger">
+          <span *ngIf="!form.get('email').valid && form.get('email').touched && form.value.email != null" class="help-block text-danger">
             Email tidak Valid
           </span>
         </div>

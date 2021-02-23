@@ -23,6 +23,7 @@ import { NavSearchComponent } from './theme/layout/admin/nav-bar/nav-left/nav-se
 import { NavRightComponent } from './theme/layout/admin/nav-bar/nav-right/nav-right.component';
 import { ConfigurationComponent } from './theme/layout/admin/configuration/configuration.component';
 import { ToastrModule } from 'ngx-toastr';
+import { UserComponent } from './theme/layout/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { ToastrModule } from 'ngx-toastr';
     NavLeftComponent,
     NavSearchComponent,
     NavRightComponent,
-    ConfigurationComponent
+    ConfigurationComponent,
+    UserComponent
   ],
   imports: [
     BrowserAnimationsModule,

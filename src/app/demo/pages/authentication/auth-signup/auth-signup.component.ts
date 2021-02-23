@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
@@ -31,7 +32,8 @@ export class AuthSignupComponent implements OnInit {
     private renderer : Renderer2, 
     private service : AuthService, 
     private httpKlien : HttpClient,
-    private router : Router) {
+    private router : Router,
+    private titleService : Title) {
     this.form = this.formBuilder.group({
       userName: this.formBuilder.control(null, [Validators.required]),
       userPassword: this.formBuilder.control(null, [Validators.required]),
@@ -51,6 +53,9 @@ export class AuthSignupComponent implements OnInit {
    }
 
   ngOnInit() {
+
+
+    this.titleService.setTitle('Sign Up' + ' | Checkpoint App');
     
   }
 
@@ -123,11 +128,13 @@ export class AuthSignupComponent implements OnInit {
         this.isLogin = data.isValid;
         if(this.isLogin){
             localStorage.setItem('token', data.token);
-            localStorage.setItem('fullName', data.fullName);
             this.toastr.success("Akun Berhasil Terdaftar");
-            this.router.navigate(['/dashboard/default']);
-            document.getElementById('login-loader').style.display = 'none';
-            document.getElementById('loader-text').style.display = 'inline';
+            this.service.getData( userAdmin.userName, userAdmin.userPassword).subscribe(data =>{
+              localStorage.setItem( "currentLogin", JSON.stringify(data.body));
+              this.router.navigate(['/dashboard/default']);
+              document.getElementById('login-loader').style.display = 'none';
+              document.getElementById('loader-text').style.display = 'inline';
+            })
         } else {
           this.toastr.error("Terjadi kesalahan");
           document.getElementById('login-loader').style.display = 'none';
