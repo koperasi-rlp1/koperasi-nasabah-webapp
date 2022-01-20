@@ -11,7 +11,7 @@ export class UserComponent implements OnInit {
   constructor(private titleService: Title) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Profile Setting' + ' | Checkpoint App');
+    this.titleService.setTitle('Profile Setting' + ' | Koperasi App');
   }
 
 }

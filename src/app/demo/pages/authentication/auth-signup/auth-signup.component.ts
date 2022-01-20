@@ -27,10 +27,10 @@ export class AuthSignupComponent implements OnInit {
   randomText = randomWords(1).toString();
   isLogin = false;
 
-  constructor(private formBuilder : FormBuilder, 
-    private toastr : ToastrService, 
-    private renderer : Renderer2, 
-    private service : AuthService, 
+  constructor(private formBuilder : FormBuilder,
+    private toastr : ToastrService,
+    private renderer : Renderer2,
+    private service : AuthService,
     private httpKlien : HttpClient,
     private router : Router,
     private titleService : Title) {
@@ -55,8 +55,8 @@ export class AuthSignupComponent implements OnInit {
   ngOnInit() {
 
 
-    this.titleService.setTitle('Sign Up' + ' | Checkpoint App');
-    
+    this.titleService.setTitle('Sign Up' + ' | Koperasi App');
+
   }
 
   verification(){
@@ -150,7 +150,7 @@ export class AuthSignupComponent implements OnInit {
 
   nextForm(){
     if(this.form.get("firstName").valid && this.form.get("lastName").valid && this.form.get("userName").valid &&
-    this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid && 
+    this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid &&
     this.form.get("email").valid && this.form.get("phoneNumber").valid && this.form.get("birthDate").valid){
       if(this.form.value.retypePassword != this.form.value.userPassword){
         this.toastr.error("Verify password must be same");

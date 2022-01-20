@@ -37,7 +37,7 @@ export class AuthSigninComponent implements OnInit {
       password: this.formBuilder.control(null, [Validators.required]),
     });
 
-    this.titleService.setTitle('Welcome to Checkpoint App | Sign In');
+    this.titleService.setTitle('Welcome to Koperasi App | Sign In');
 
   }
 

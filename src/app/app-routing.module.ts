@@ -12,7 +12,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'auth/signin',
+        redirectTo: '/dashboard/default',
         pathMatch: 'full'
       },
       {
@@ -20,7 +20,7 @@ const routes: Routes = [
         loadChildren: () => import('./demo/pages/authentication/authentication.module').then(m => m.AuthenticationModule)
       }
     ]
-  }, 
+  },
   {
     path: '',
     component: UserComponent,

@@ -96,7 +96,7 @@ const NavigationItems = [
   },
   {
     id: 'forms',
-    title: 'Checkpoint App',
+    title: 'Koperasi App',
     type: 'group',
     icon: 'icon-group',
     children: [

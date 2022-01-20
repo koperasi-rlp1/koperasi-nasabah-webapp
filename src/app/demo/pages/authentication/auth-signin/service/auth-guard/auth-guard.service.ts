@@ -36,7 +36,8 @@ export class AuthGuardService implements CanActivate {
                 this.router.navigate(['/auth/signin']);
               }
           }else{
-            this.toastr.error("Access Denied!!!");
+            // this.toastr.error("Access Denied!!!");
+            console.log("Login App Koperasi")
           }
       }))
   }
