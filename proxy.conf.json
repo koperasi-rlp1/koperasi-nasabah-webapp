@@ -1,6 +1,6 @@
 {
-    "/cpService/api": {
-        "target": "http://localhost:9000",
+    "/koperasi-service/api": {
+        "target": "http://localhost:7500",
         "secure" : false
     },
 
@@ -8,6 +8,6 @@
         "target": "http://localhost:9001",
         "secure" : false
     }
-    
+
 }
 

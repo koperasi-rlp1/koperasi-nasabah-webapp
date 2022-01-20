@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Status, User } from './user';
+import { NasabahCheck, Status, User } from './user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   loggedIn = false;
-  
+
   userPassword : Array<any> = [
     "82","75","61","86","84","78","67"
   ];
@@ -41,7 +41,7 @@ export class AuthService {
   //     this.toastr.error("username yang dimasukan tidak valid");
   //   }
   //   this.loggedIn = (username == "19201180" && this.userPassword.includes(password));
-    
+
   // }
   public register(value : any){
     return this.httpKlien.post<any>(`${environment.urlAuth}/regis/save`, value, {observe : 'response'});
@@ -57,24 +57,21 @@ export class AuthService {
 
   logout(){
     const token = localStorage.getItem("token").toString();
-    this.httpKlien.delete(environment.urlAuth + '/auth/logout/' + token).pipe(map(data => data )).subscribe(resp => {
+    this.httpKlien.delete(environment.urlApi + '/auth/logout/' + token).pipe(map(data => data )).subscribe(resp => {
       localStorage.removeItem('token');
       localStorage.removeItem('currentLogin');
-      this.router.navigate(["/"]);
+      this.router.navigate(["/auth/signin"]);
     });
   }
 
 
-  isAuthorized(allowedRoles: string[]): Observable<Status> {
+  isAuthorized(): Observable<NasabahCheck> {
     const token = localStorage.getItem('token');
     if( token != null) {
-        const userAdmin = new User();
-        userAdmin.token = token;
-        return this.httpKlien.post(environment.urlAuth + '/auth/checking', userAdmin
-        ).pipe(map( data => data as Status));
+        return this.httpKlien.post(environment.urlApi + '/auth/checking', token).pipe(map( data => data as NasabahCheck));
     } else {
         this.toastr.error("Access Denied!!!");
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/signin']);
     }
   }
 

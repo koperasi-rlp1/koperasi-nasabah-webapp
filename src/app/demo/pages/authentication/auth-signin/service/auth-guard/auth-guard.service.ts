@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -15,10 +16,25 @@ export class AuthGuardService implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):
   Observable<boolean> | Promise<boolean> | boolean {
       const allowedRoles = next.data.allowedRoles;
-      return this.authService.isAuthorized(allowedRoles)
+      return this.authService.isAuthorized()
       .pipe(map(data => {
-          if(data.roles != null && allowedRoles.some(r => data.roles.includes(r)) && data.isValid){
-              return true;
+          if(data.nip != null){
+              const datePipe = new DatePipe('en-US');
+              const myFormattedDate = datePipe.transform(data.since, 'd/MM/yyyy');
+              let date = new Date().toLocaleDateString()
+              const now = datePipe.transform(date, 'd/MM/yyyy');
+              const value = JSON.parse(localStorage.getItem("currentLogin"));
+              if(myFormattedDate == now){
+                if(allowedRoles.some(r => value.idStatusKeanggotaan)){
+                  return true;
+                } else{
+                  this.toastr.error("Access Denied!!!");
+                }
+              } else {
+                localStorage.removeItem('token')
+                this.toastr.info("Token Expired", "Relogin required");
+                this.router.navigate(['/auth/signin']);
+              }
           }else{
             this.toastr.error("Access Denied!!!");
           }

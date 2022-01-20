@@ -1,6 +1,6 @@
 
 export const environment = {
   production: false,
-  urlApi : "/cpService/api",
+  urlApi : "/koperasi-service/api",
   urlAuth : "/cpAuth/apcd/api"
 };

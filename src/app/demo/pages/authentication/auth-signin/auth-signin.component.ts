@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './service/auth.service';
-import { Status, StatusChecking, User } from './service/user';
+import { Status, StatusChecking, User, NasabahLogin, NasabahLogResponse } from './service/user';
 
 @Component({
   selector: 'app-auth-signin',
@@ -37,10 +38,11 @@ export class AuthSigninComponent implements OnInit {
     });
 
     this.titleService.setTitle('Welcome to Checkpoint App | Sign In');
+
   }
 
   onLogin() {
-    this.checkAccount(this.form.value.username, this.form.value.password);
+    this.login(this.form.value.username, this.form.value.password);
   }
 
   checkAccount(username: string, password: string) {
@@ -84,22 +86,26 @@ export class AuthSigninComponent implements OnInit {
   login(username: string, password: string): void {
     document.getElementById('login-loader').style.display = 'inline';
     document.getElementById('loader-text').style.display = 'none';
-    const userAdmin = new User();
-    userAdmin.userName = username;
-    userAdmin.userPassword = password;
-    this.httpKlien.post(environment.urlAuth + '/auth/login', userAdmin
-    ).pipe(map(data => data as Status))
+    const userAdmin = new NasabahLogin();
+    userAdmin.username = username;
+    userAdmin.password = password;
+    console.log(userAdmin)
+    this.httpKlien.post(environment.urlApi + '/auth/login', userAdmin
+    ).pipe(map(data => data as NasabahLogResponse))
       .subscribe(data => {
         this.isLogin = data.isValid;
         if (this.isLogin) {
           localStorage.setItem('token', data.token);
+          localStorage.setItem( "currentLogin", JSON.stringify(data.dataNasabah));
           this._toastr.success("Anda Berhasil Login");
           this.router.navigate(['/dashboard/default']);
-          this.service.getData( userAdmin.userName, userAdmin.userPassword).subscribe(data =>{
-            localStorage.setItem( "currentLogin", JSON.stringify(data.body));
-            document.getElementById('login-loader').style.display = 'none';
-            document.getElementById('loader-text').style.display = 'inline';
-          })
+          document.getElementById('login-loader').style.display = 'none';
+          document.getElementById('loader-text').style.display = 'inline';
+          // this.service.getData( userAdmin.userName, userAdmin.userPassword).subscribe(data =>{
+          //   localStorage.setItem( "currentLogin", JSON.stringify(data.body));
+          //   document.getElementById('login-loader').style.display = 'none';
+          //   document.getElementById('loader-text').style.display = 'inline';
+          // })
         } else {
           this._toastr.error("Terjadi kesalahan");
           document.getElementById('login-loader').style.display = 'none';

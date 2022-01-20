@@ -360,7 +360,7 @@ export class DefaultComponent implements OnInit {
 
   getData(){
     const value = JSON.parse(localStorage.getItem("currentLogin"));
-    this.name = value.fullName;
+    this.name = value.namaNasabah;
   }
 
 }
