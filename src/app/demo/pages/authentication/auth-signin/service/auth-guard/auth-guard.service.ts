@@ -29,8 +29,10 @@ export class AuthGuardService implements CanActivate {
                   return true;
                 } else{
                   this.toastr.error("Access Denied!!!");
+                  this.router.navigate(['/auth/signin']);
                 }
               } else {
+                this.authService.logout()
                 localStorage.removeItem('token')
                 this.toastr.info("Token Expired", "Relogin required");
                 this.router.navigate(['/auth/signin']);
@@ -38,6 +40,7 @@ export class AuthGuardService implements CanActivate {
           }else{
             // this.toastr.error("Access Denied!!!");
             console.log("Login App Koperasi")
+            this.router.navigate(['/auth/signin']);
           }
       }))
   }

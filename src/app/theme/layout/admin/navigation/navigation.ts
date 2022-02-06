@@ -33,8 +33,8 @@ const NavigationItems = [
     icon: 'icon-ui',
     children: [
       {
-        id: 'Home',
-        title: 'Home',
+        id: 'Beranda',
+        title: 'Beranda',
         type: 'item',
         url: '/dashboard/default',
         icon: 'feather icon-home',
@@ -43,47 +43,61 @@ const NavigationItems = [
     ]
   },
   {
-    id: 'Activity',
-    title: 'Activity',
+    id: 'Aktifitas',
+    title: 'Aktifitas',
     type: 'group',
     icon: 'icon-ui',
     children: [
       {
-        id: 'basic',
-        title: 'Options',
+        id: 'transaksi',
+        title: 'Transaksi',
         type: 'collapse',
         icon: 'feather icon-list',
         children: [
           {
             id: 'button',
-            title: 'My Item',
+            title: 'Simpanan Wajib',
             type: 'item',
-            url: '/basic/button'
+            url: '/transaksi/simpanan-wajib',
+            children: [
+              {
+                id: 'Tambah',
+                title: 'Tambah',
+                type: 'anak',
+                url: '/transaksi/simpanan-wajib/tambah'
+              },
+              {
+                id: 'Tambah',
+                title: 'Menunggu Korfirmasi',
+                type: 'anak',
+                url: '/transaksi/simpanan-wajib/menunggu-konfirmasi'
+              }
+            ]
           },
           {
             id: 'badges',
-            title: 'Inventories',
+            title: 'Simpanan Suka Rela',
             type: 'item',
-            url: '/basic/badges'
+            url: '/transaksi/simpanan-sukarela'
           },
           {
             id: 'breadcrumb-pagination',
-            title: 'Organization',
+            title: 'Pinjaman',
             type: 'item',
-            url: '/basic/breadcrumb-paging'
-          },
-          {
-            id: 'collapse',
-            title: 'Message' + ' (2)' ,
-            type: 'item',
-            url: '/basic/collapse'
-          },
-          {
-            id: 'tabs-pills',
-            title: 'Contact Us',
-            type: 'item',
-            url: '/basic/tabs-pills'
+            url: '/transaksi/pinjaman'
           }
+          // {
+          //   id: 'collapse',
+          //   title: 'Message' + ' (2)' ,
+          //   type: 'item',
+          //   url: '/basic/collapse'
+          // },
+          // {
+          //   id: 'tabs-pills',
+          //   title: 'Contact Us',
+          //   type: 'item',
+          //   url: '/basic/tabs-pills'
+          // }
           // {
           //   id: 'typography',
           //   title: 'Typography',
@@ -96,17 +110,17 @@ const NavigationItems = [
   },
   {
     id: 'forms',
-    title: 'Koperasi App',
+    title: 'Data Analisis',
     type: 'group',
     icon: 'icon-group',
     children: [
       {
         id: 'forms-element',
-        title: 'About',
+        title: 'Cek Saldo',
         type: 'item',
         url: '/forms/basic',
         classes: 'nav-item',
-        icon: 'feather icon-cloud'
+        icon: 'feather icon-bar-chart'
       }
       // {
       //   id: 'tables',
@@ -118,62 +132,62 @@ const NavigationItems = [
       // }
     ]
   },
-  {
-    id: 'chart-maps',
-    title: 'Data',
-    type: 'group',
-    icon: 'icon-charts',
-    children: [
-      {
-        id: 'charts',
-        title: 'My Statistics',
-        type: 'item',
-        url: '/charts/morris',
-        classes: 'nav-item',
-        icon: 'feather icon-activity'
-      },
-      {
-        id: 'sample-page',
-        title: 'My Note',
-        type: 'item',
-        url: '/sample-page',
-        classes: 'nav-item',
-        icon: 'feather icon-clipboard'
-      }
-    ]
-  },
-  {
-    id: 'pages',
-    title: 'Pages',
-    type: 'group',
-    icon: 'icon-pages',
-    children: [
-      {
-        id: 'auth',
-        title: 'Authentication',
-        type: 'collapse',
-        icon: 'feather icon-lock',
-        children: [
-          {
-            id: 'signup',
-            title: 'Master Register',
-            type: 'item',
-            url: 'coming soon',
-            target: true,
-            breadcrumbs: false
-          },
-          {
-            id: 'signin',
-            title: 'Login as Master',
-            type: 'item',
-            url: 'coming soon',
-            target: true,
-            breadcrumbs: false
-          }
-        ]
-      }
-    ]
-  }
+  // {
+  //   id: 'chart-maps',
+  //   title: 'Data',
+  //   type: 'group',
+  //   icon: 'icon-charts',
+  //   children: [
+  //     {
+  //       id: 'charts',
+  //       title: 'My Statistics',
+  //       type: 'item',
+  //       url: '/charts/morris',
+  //       classes: 'nav-item',
+  //       icon: 'feather icon-activity'
+  //     },
+  //     {
+  //       id: 'sample-page',
+  //       title: 'My Note',
+  //       type: 'item',
+  //       url: '/sample-page',
+  //       classes: 'nav-item',
+  //       icon: 'feather icon-clipboard'
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: 'pages',
+  //   title: 'Pages',
+  //   type: 'group',
+  //   icon: 'icon-pages',
+  //   children: [
+  //     {
+  //       id: 'auth',
+  //       title: 'Authentication',
+  //       type: 'collapse',
+  //       icon: 'feather icon-lock',
+  //       children: [
+  //         {
+  //           id: 'signup',
+  //           title: 'Master Register',
+  //           type: 'item',
+  //           url: 'coming soon',
+  //           target: true,
+  //           breadcrumbs: false
+  //         },
+  //         {
+  //           id: 'signin',
+  //           title: 'Login as Master',
+  //           type: 'item',
+  //           url: 'coming soon',
+  //           target: true,
+  //           breadcrumbs: false
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
 ];
 
 @Injectable()

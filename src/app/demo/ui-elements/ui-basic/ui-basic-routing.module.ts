@@ -6,15 +6,15 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'button',
+        path: 'simpanan-wajib',
         loadChildren: () => import('./basic-button/basic-button.module').then(m => m.BasicButtonModule)
       },
       {
-        path: 'badges',
+        path: 'simpanan-sukarela',
         loadChildren: () => import('./basic-badge/basic-badge.module').then(m => m.BasicBadgeModule)
       },
       {
-        path: 'breadcrumb-paging',
+        path: 'pinjaman',
         loadChildren: () => import('./breadcrumb-paging/breadcrumb-paging.module').then(m => m.BreadcrumbPagingModule)
       },
       {

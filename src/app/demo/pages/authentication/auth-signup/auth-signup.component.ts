@@ -145,20 +145,24 @@ export class AuthSignupComponent implements OnInit {
 
 
   prevForm(){
-    this.formNumber = 1;
+    this.formNumber = this.formNumber-1;
   }
 
   nextForm(){
-    if(this.form.get("firstName").valid && this.form.get("lastName").valid && this.form.get("userName").valid &&
-    this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid &&
-    this.form.get("email").valid && this.form.get("phoneNumber").valid && this.form.get("birthDate").valid){
-      if(this.form.value.retypePassword != this.form.value.userPassword){
-        this.toastr.error("Verify password must be same");
-      }else {
-        this.formNumber = 2;
+    if(this.formNumber == 1){
+      if(this.form.get("firstName").valid && this.form.get("lastName").valid && this.form.get("userName").valid &&
+      this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid &&
+      this.form.get("email").valid && this.form.get("phoneNumber").valid && this.form.get("birthDate").valid){
+        if(this.form.value.retypePassword != this.form.value.userPassword){
+          this.toastr.error("Verify password must be same");
+        }else {
+          this.formNumber = 2;
+        }
+      } else {
+        this.toastr.error("Form Harus di isi lengkap");
       }
-    } else {
-      this.toastr.error("Form Harus di isi lengkap");
+    } else if (this.formNumber == 2){
+      this.formNumber = 3
     }
   }
 

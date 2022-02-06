@@ -44,7 +44,7 @@ const routes: Routes = [
         data: {allowedRoles: ['user']}
       },
       {
-        path: 'basic',
+        path: 'transaksi',
         canActivate : [AuthGuardService],
         loadChildren: () => import('./demo/ui-elements/ui-basic/ui-basic.module').then(m => m.UiBasicModule),
         data: {allowedRoles: ['user']}

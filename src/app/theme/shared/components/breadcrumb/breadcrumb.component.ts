@@ -49,8 +49,27 @@ export class BreadcrumbComponent implements OnInit {
         }];
         title = a.title;
       } else {
+
         if (a.type === 'group' && 'children' in a) {
           a.children.forEach(function (b) {
+            if(b.type === 'anak' && b.url === activeLink){
+              console.log("get con 3")
+              result = [
+                /*{
+                'url': ('url' in a) ? a.url : false,
+                'title': a.title,
+                'breadcrumbs': ('breadcrumbs' in a) ? a.breadcrumbs : true,
+                  'type': a.type
+                },*/
+                {
+                'url': ('url' in b) ? b.url : false,
+                'title': b.title,
+                'breadcrumbs': ('breadcrumbs' in b) ? b.breadcrumbs : true,
+                  'type': b.type
+                }
+              ];
+              title = b.title;
+            }
             if (b.type === 'item' && 'url' in b && b.url === activeLink) {
               result = [
                 /*{
@@ -92,6 +111,62 @@ export class BreadcrumbComponent implements OnInit {
                       }
                     ];
                     title = c.title;
+                  } else if(c.type === 'anak' && 'url' in c && c.url === activeLink){
+                    result = [
+                      /*{
+                        'url': ('url' in a) ? a.url : false,
+                        'title': a.title,
+                        'breadcrumbs': ('breadcrumbs' in a) ? a.breadcrumbs : true,
+                        'type': a.type
+                      },*/
+                      {
+                        'url': ('url' in b) ? b.url : false,
+                        'title': b.title,
+                        'breadcrumbs': ('breadcrumbs' in b) ? b.breadcrumbs : true,
+                        'type': b.type
+                      },
+                      {
+                        'url': ('url' in c) ? c.url : false,
+                        'title': c.title,
+                        'breadcrumbs': ('breadcrumbs' in c) ? c.breadcrumbs : true,
+                        'type': c.type
+                      }
+                    ];
+                    title = c.title;
+                  } else {
+                    if (c.type === 'item' && 'children' in c) {
+                      c.children.forEach(function (d) {
+                        if(d.type === 'anak' && 'url' in d && d.url === activeLink){
+                          result = [
+                            /*{
+                              'url': ('url' in a) ? a.url : false,
+                              'title': a.title,
+                              'breadcrumbs': ('breadcrumbs' in a) ? a.breadcrumbs : true,
+                              'type': a.type
+                            },*/
+                            {
+                              'url': ('url' in b) ? b.url : false,
+                              'title': b.title,
+                              'breadcrumbs': ('breadcrumbs' in b) ? b.breadcrumbs : true,
+                              'type': b.type
+                            },
+                            {
+                              'url': ('url' in c) ? c.url : false,
+                              'title': c.title,
+                              'breadcrumbs': ('breadcrumbs' in c) ? c.breadcrumbs : true,
+                              'type': c.type
+                            },
+                            {
+                              'url': ('url' in d) ? d.url : false,
+                              'title': d.title,
+                              'breadcrumbs': ('breadcrumbs' in d) ? d.breadcrumbs : true,
+                              'type': d.type
+                            }
+                          ];
+                          title = d.title + ' - ' + c.title;
+                        }
+                      })
+                    }
                   }
                 });
               }
