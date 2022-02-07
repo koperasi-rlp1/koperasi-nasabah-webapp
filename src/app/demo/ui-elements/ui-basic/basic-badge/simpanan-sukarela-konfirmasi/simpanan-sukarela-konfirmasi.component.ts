@@ -1,16 +1,17 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { DatatablesRequest } from 'src/app/demo/model/DatatablesRequest';
 import { DataTransaksi } from 'src/app/demo/model/transaksi';
-import { SimpananSukaRelaService } from '../../basic-badge/simpanan-sukarela.service';
+import { SimpananSukaRelaService } from '../simpanan-sukarela.service';
 
 @Component({
-  selector: 'app-simpanan-wajib-konfirmasi',
-  templateUrl: './simpanan-wajib-konfirmasi.component.html',
-  styleUrls: ['./simpanan-wajib-konfirmasi.component.scss']
+  selector: 'app-simpanan-sukarela-konfirmasi',
+  templateUrl: './simpanan-sukarela-konfirmasi.component.html',
+  styleUrls: ['./simpanan-sukarela-konfirmasi.component.scss']
 })
-export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
+export class SimpananSukarelaKonfirmasiComponent implements OnInit, OnDestroy {
 
   @ViewChild(DataTableDirective, {static: false})
   dtElement : DataTableDirective;
@@ -46,9 +47,9 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
         let dataParam = new DataTransaksi();
         const value = JSON.parse(localStorage.getItem("currentLogin"));
         dataParam.idNasabah = value.idBackup;
-        dataParam.jenisTransaksi = "SIMPANAN WAJIB";
+        dataParam.jenisTransaksi = "SIMPANAN SUKA RELA";
         dataTablesParameters.extraParam = dataParam;
-        this.service.datatables(dataTablesParameters).subscribe( resp => {
+        this.service.datatablesApproval(dataTablesParameters).subscribe( resp => {
           callback({
             recordsTotal : resp.recordTotal,
             recordsFiltered : resp.recordFiltered,
@@ -58,8 +59,8 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
         });
       },
       columns: [{
-        title : 'No',
-        data : 'no'
+        title : 'Nomor Approval',
+        data : 'idApproval'
       },
     {
       title: 'Nominal Transaksi',
@@ -72,6 +73,14 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
     {
       title : 'Keterangan',
       data : 'deskripsi'
+    },
+    {
+      title : 'Bukti Pembayaran',
+      data : 'buktiPembayaran',
+      orderable: false,
+      render(data, type, row){
+        return `<img src="/koperasi-service/api/transaksi-approval/file/${data}" width="100px">`;
+      }
     },
     // ,
     // {
@@ -88,8 +97,8 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
       data : 'id',
       orderable: false,
       render(data, type, row){
-        return `<button type="button" class="btn btn-dark btn-default delete" data-element-id="${row.id}">
-        Delete</button>`;
+        return `<button type="button" class="btn btn-outline-danger"><i class="feather icon-trash"></i>Delete</button> &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-outline-secondary"><i class="feather icon-edit"></i>Edit</button>`;
       },
     }
     ],
@@ -146,4 +155,3 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
 
 
 }
-

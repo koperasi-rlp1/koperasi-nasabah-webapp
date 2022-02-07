@@ -8,3 +8,13 @@ export class SimpananSukaRela{
   deskripsi : any;
 
 }
+
+export class SaveSukaRela{
+
+  jenisTransaksi : any;
+  nominalTransaksi : any;
+  idNasabah : any;
+  buktiPembayaran : any;
+  deskripsi : any;
+  tanggal : any;
+}

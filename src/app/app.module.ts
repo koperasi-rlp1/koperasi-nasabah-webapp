@@ -41,7 +41,7 @@ import { UserComponent } from './theme/layout/user/user.component';
     NavSearchComponent,
     NavRightComponent,
     ConfigurationComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserAnimationsModule,

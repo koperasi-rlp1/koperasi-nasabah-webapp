@@ -29,7 +29,6 @@ export class AuthGuardService implements CanActivate {
                   return true;
                 } else{
                   this.toastr.error("Access Denied!!!");
-                  this.router.navigate(['/auth/signin']);
                 }
               } else {
                 this.authService.logout()

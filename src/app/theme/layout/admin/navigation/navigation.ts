@@ -78,7 +78,21 @@ const NavigationItems = [
             id: 'badges',
             title: 'Simpanan Suka Rela',
             type: 'item',
-            url: '/transaksi/simpanan-sukarela'
+            url: '/transaksi/simpanan-sukarela',
+            children:[
+              {
+                id: 'Tambah',
+                title: 'Tambah',
+                type: 'anak',
+                url: '/transaksi/simpanan-sukarela/tambah'
+              },
+              {
+                id: 'Tambah',
+                title: 'Menunggu Korfirmasi',
+                type: 'anak',
+                url: '/transaksi/simpanan-sukarela/menunggu-konfirmasi'
+              }
+            ]
           },
           {
             id: 'breadcrumb-pagination',
