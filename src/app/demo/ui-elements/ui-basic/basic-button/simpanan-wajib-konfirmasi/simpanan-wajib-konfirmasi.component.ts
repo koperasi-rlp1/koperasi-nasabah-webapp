@@ -48,7 +48,7 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
         dataParam.idNasabah = value.idBackup;
         dataParam.jenisTransaksi = "SIMPANAN WAJIB";
         dataTablesParameters.extraParam = dataParam;
-        this.service.datatables(dataTablesParameters).subscribe( resp => {
+        this.service.datatablesApproval(dataTablesParameters).subscribe( resp => {
           callback({
             recordsTotal : resp.recordTotal,
             recordsFiltered : resp.recordFiltered,
@@ -58,8 +58,8 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
         });
       },
       columns: [{
-        title : 'No',
-        data : 'no'
+        title : 'Nomor Approval',
+        data : 'idApproval'
       },
     {
       title: 'Nominal Transaksi',
@@ -72,6 +72,14 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
     {
       title : 'Keterangan',
       data : 'deskripsi'
+    },
+    {
+      title : 'Bukti Pembayaran',
+      data : 'buktiPembayaran',
+      orderable: false,
+      render(data, type, row){
+        return `<img src="/koperasi-service/api/transaksi-approval/file/${data}" width="100px">`;
+      }
     },
     // ,
     // {
@@ -88,8 +96,8 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
       data : 'id',
       orderable: false,
       render(data, type, row){
-        return `<button type="button" class="btn btn-dark btn-default delete" data-element-id="${row.id}">
-        Delete</button>`;
+        return `<button type="button" class="btn btn-outline-danger"><i class="feather icon-trash"></i>Delete</button> &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-outline-secondary"><i class="feather icon-edit"></i>Edit</button>`;
       },
     }
     ],

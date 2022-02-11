@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { Nasabah } from './../auth-signin/service/user';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -7,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth-signin/service/auth.service';
-import { NewUser, Status, StatusChecking, User } from '../auth-signin/service/user';
+import { Status, StatusChecking, User } from '../auth-signin/service/user';
 declare var require;
 const randomWords = require('random-words');
 
@@ -26,35 +27,48 @@ export class AuthSignupComponent implements OnInit {
   formatNumber = "+62";
   randomText = randomWords(1).toString();
   isLogin = false;
+  jabatan : Array<any> = null;
+  formPembayaran : FormGroup;
+  selectedFiles: FileList;
+  currentFile: File;
+  progress = 0;
 
   constructor(private formBuilder : FormBuilder,
     private toastr : ToastrService,
-    private renderer : Renderer2,
     private service : AuthService,
     private httpKlien : HttpClient,
     private router : Router,
     private titleService : Title) {
     this.form = this.formBuilder.group({
+      namaAwal: this.formBuilder.control(null, [Validators.required]),
+      namaAkhir: this.formBuilder.control(null, [Validators.required]),
+      jenisKelamin: this.formBuilder.control(null, [Validators.required]),
+      noHp: this.formBuilder.control(null, [Validators.required]),
+      tanggalLahir: this.formBuilder.control(null, [Validators.required]),
+      nip: this.formBuilder.control(null, [Validators.required]),
+      unitOperasional: this.formBuilder.control(null),
+      accept: this.formBuilder.control(null),
       userName: this.formBuilder.control(null, [Validators.required]),
       userPassword: this.formBuilder.control(null, [Validators.required]),
       retypePassword: this.formBuilder.control(null, [Validators.required]),
-      firstName: this.formBuilder.control(null, [Validators.required]),
-      lastName: this.formBuilder.control(null, [Validators.required]),
-      gender: this.formBuilder.control(null, [Validators.required]),
-      email: this.formBuilder.control(null, [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      phoneNumber: this.formBuilder.control(null, [Validators.required]),
-      birthDate: this.formBuilder.control(null, [Validators.required]),
-      accept: this.formBuilder.control(null)
+      jabatan: this.formBuilder.control(null, [Validators.required]),
+      email: this.formBuilder.control(null, [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
     });
 
     this.acceptform = this.formBuilder.group({
       verificateCode : this.formBuilder.control(null)
     })
+
+    this.formPembayaran = this.formBuilder.group({
+      fileBuktiPembayaran : this.formBuilder.control(null)
+    })
    }
 
   ngOnInit() {
 
-
+    this.service.jabatan().subscribe(data => {
+      this.jabatan = data.body;
+    })
     this.titleService.setTitle('Sign Up' + ' | Koperasi App');
 
   }
@@ -67,24 +81,76 @@ export class AuthSignupComponent implements OnInit {
   }
 
   submit(){
+    if(this.form.valid){
+      let value = new Nasabah();
+      value.namaNasabah = this.form.value.namaAwal + ' ' + this.form.value.namaAkhir;
+      value.nip = this.form.value.nip;
+      value.unitOperasional = this.form.value.unitOperasional;
+      value.username = this.form.value.userName;
+      value.password = this.form.value.userPassword;
+      value.jenisKelamin = this.form.value.jenisKelamin;
+      value.email = this.form.value.email;
+      value.noHp = this.formatNumber + this.form.value.noHp;
+      value.tanggalLahir = this.form.value.tanggalLahir;
+      value.jabatan = this.form.value.jabatan;
+      this.service.register(value).subscribe(response => {
+        localStorage.setItem('batch', response.body.nip)
+        this.formNumber = 3;
+      })
+    }
+  }
+
+
+  selectFile(event){
+    var filename = event.target.files[0].name;
+    $("#label-file").text(filename);
+    this.selectedFiles = event.target.files;
+  }
+
+  regis(){
     document.getElementById('login-loader').style.display = 'inline';
     document.getElementById('loader-text').style.display = 'none';
-    let value = new NewUser();
-    value.firstName = this.form.value.firstName;
-    value.lastName = this.form.value.lastName;
-    value.userName = this.form.value.userName;
-    value.userPassword = this.form.value.userPassword;
-    value.gender = this.form.value.gender;
-    value.email = this.form.value.email;
-    value.phoneNumber = this.formatNumber+this.form.value.phoneNumber;
-    value.birthDate = this.form.value.birthDate;
-    this.service.register(value).subscribe(response => {
-      let values = new NewUser();
-      values.userName = this.form.value.userName;
-      this.service.verify(values).subscribe(response => {
-        this.checkAccount(value.userName, value.userPassword);
-      })
-    })
+    this.progress = 0;
+    if(this.selectedFiles.item(0) != undefined){
+      this.currentFile = this.selectedFiles.item(0);
+      this.service.upload(this.currentFile).subscribe(
+        event => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round( 100 * event.loaded / event.total);
+          }else if (event instanceof HttpResponse) {
+            console.log(event.body);
+            let value = new Nasabah();
+            value.fileBuktiPembayaran = event.body.file;
+            value.nip = localStorage.getItem('batch');
+            this.service.update(value).subscribe(
+              event => {
+                localStorage.removeItem('batch');
+                this.toastr.success("Registrasi Berhasi", "Silahkan Menunggu Konfirmasi Dari Admin");
+                this.router.navigate(['/transaksi/simpanan-wajib/menunggu-konfirmasi']);
+              },
+              err => {
+                document.getElementById('login-loader').style.display = 'none';
+                document.getElementById('loader-text').style.display = 'inline';
+                $(':button[type="submit"]').prop('disabled', false);
+                this.progress = 0;
+                this.toastr.error("Terjadi Kesalahan");
+                this.currentFile = undefined;
+              });
+          }
+        },
+        err => {
+          document.getElementById('login-loader').style.display = 'none';
+          document.getElementById('loader-text').style.display = 'inline';
+          this.progress = 0;
+          alert('Could not upload the file!');
+          this.currentFile = undefined;
+        });
+    } else {
+      document.getElementById('login-loader').style.display = 'none';
+      document.getElementById('loader-text').style.display = 'inline';
+      this.toastr.error("File TIdak Valid");
+      this.currentFile = undefined;
+    }
   }
 
   checkAccount(username: string, password: string){
@@ -150,13 +216,19 @@ export class AuthSignupComponent implements OnInit {
 
   nextForm(){
     if(this.formNumber == 1){
-      if(this.form.get("firstName").valid && this.form.get("lastName").valid && this.form.get("userName").valid &&
-      this.form.get("userName").valid && this.form.get("userPassword").valid && this.form.get("gender").valid &&
-      this.form.get("email").valid && this.form.get("phoneNumber").valid && this.form.get("birthDate").valid){
+      if(this.form.valid){
         if(this.form.value.retypePassword != this.form.value.userPassword){
           this.toastr.error("Verify password must be same");
         }else {
-          this.formNumber = 2;
+          const nip : string = this.form.value.nip;
+          this.service.checking(nip, this.form.value.userName).subscribe(data => {
+            console.log(data.body)
+            if(data.body.message == "Data Unique"){
+              this.formNumber = 2;
+            } else {
+              this.toastr.info(data.body.message)
+            }
+          })
         }
       } else {
         this.toastr.error("Form Harus di isi lengkap");

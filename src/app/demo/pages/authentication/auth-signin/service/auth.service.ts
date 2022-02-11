@@ -1,11 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { NasabahCheck, Status, User } from './user';
+import { Nasabah, NasabahCheck, Status, User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,31 @@ export class AuthService {
 
   // }
   public register(value : any){
-    return this.httpKlien.post<any>(`${environment.urlAuth}/regis/save`, value, {observe : 'response'});
+    return this.httpKlien.post<any>(`${environment.urlApi}/nasabah-procedure/register`, value, {observe : 'response'});
+  }
+
+  public upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    const req = new HttpRequest('POST', environment.urlApi + '/nasabah-procedure/verifikasiPembayaran', formData, {
+        reportProgress: true,
+        responseType: 'json'
+    });
+
+    return this.httpKlien.request(req);
+  }
+
+  public update(value: Nasabah){
+    return this.httpKlien.put<any>(`${environment.urlApi}/nasabah-procedure/updateFaseRegistrasi`, value, {observe : 'response'});
+  }
+
+  public checking(nip : string, username : any){
+    let param = new HttpParams();
+    param.append("nip", nip);
+    param.append("username", username)
+    return this.httpKlien.get<any>(`${environment.urlApi}/nasabah-procedure/checking/${nip}/${username}`, {observe : 'response'});
   }
 
   public getData(username : any, password : any){
@@ -64,13 +88,16 @@ export class AuthService {
     });
   }
 
+  jabatan(){
+    return this.httpKlien.get<any>(`${environment.urlApi}/jabatan/findAll`, {observe : 'response'});
+  }
+
 
   isAuthorized(): Observable<NasabahCheck> {
     const token = localStorage.getItem('token');
     if( token != null) {
         return this.httpKlien.post(environment.urlApi + '/auth/checking', token).pipe(map( data => data as NasabahCheck));
     } else {
-        this.toastr.error("Access Denied!!!");
         this.router.navigate(['/auth/signin']);
     }
   }

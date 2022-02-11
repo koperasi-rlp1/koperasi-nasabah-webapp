@@ -1,3 +1,4 @@
+import { Nasabah } from './../auth-signin/service/user';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth-signin/service/auth.service';
-import { NewUser, Status, StatusChecking, User } from '../auth-signin/service/user';
+import { Status, StatusChecking, User } from '../auth-signin/service/user';
 declare var require;
 const randomWords = require('random-words');
 
@@ -28,12 +29,12 @@ export class AuthVerificateAccountComponent implements OnInit {
   isLogin = false;
 
 
-  constructor(private formBuilder : FormBuilder, 
-    private toastr : ToastrService, 
-    private renderer : Renderer2, 
-    private service : AuthService, 
+  constructor(private formBuilder : FormBuilder,
+    private toastr : ToastrService,
+    private renderer : Renderer2,
+    private service : AuthService,
     private httpKlien : HttpClient,
-    private router : Router) { 
+    private router : Router) {
       this.acceptform = this.formBuilder.group({
         verificateCode : this.formBuilder.control(null)
       })
@@ -45,11 +46,11 @@ export class AuthVerificateAccountComponent implements OnInit {
   submit(){
     document.getElementById('login-loader').style.display = 'inline';
     document.getElementById('loader-text').style.display = 'none';
-      let values = new NewUser();
-      values.userName = localStorage.getItem('username');
+      let values = new Nasabah();
+      values.username = localStorage.getItem('username');
       const userPassword = localStorage.getItem('password');
       this.service.verify(values).subscribe(response => {
-        this.checkAccount(values.userName, userPassword);
+        this.checkAccount(values.username, userPassword);
       })
   }
 

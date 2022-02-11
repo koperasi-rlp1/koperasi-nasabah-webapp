@@ -107,10 +107,14 @@ export class AuthSigninComponent implements OnInit {
           //   document.getElementById('loader-text').style.display = 'inline';
           // })
         } else {
-          this._toastr.error("Terjadi kesalahan");
+          this._toastr.error(data.responseMessage);
           document.getElementById('login-loader').style.display = 'none';
           document.getElementById('loader-text').style.display = 'inline';
         }
+      }, error => {
+        this._toastr.error("User name atau NIP Tidak Terdaftar");
+        document.getElementById('login-loader').style.display = 'none';
+        document.getElementById('loader-text').style.display = 'inline';
       });
   }
 

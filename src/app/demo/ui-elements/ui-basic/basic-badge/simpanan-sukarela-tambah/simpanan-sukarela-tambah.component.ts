@@ -67,7 +67,7 @@ export class SimpananSukarelaTambahComponent implements OnInit {
                 this.service.save(data).subscribe(
                   event => {
                     this._toastr.success("Data Telah Diajukan");
-                    this.router.navigate(['/transaksi/simpanan-sukarela']);
+                    this.router.navigate(['/transaksi/simpanan-sukarela/menunggu-konfirmasi']);
                   },
                   err => {
                     document.getElementById('login-loader').style.display = 'none';

@@ -13,15 +13,20 @@ export class NasabahLogin {
     password : string;
 }
 
-export class NewUser{
-    firstName : any;
-    lastName : any;
-    userName : any;
-    userPassword : any;
-    gender : CharacterData;
+export class Nasabah{
+    namaNasabah : any;
+    nip : any;
+    unitOperasional : any;
+    username : any;
+    password : any;
+    jenisKelamin : any;
     email : any;
-    phoneNumber : any;
-    birthDate : any;
+    noHp : any;
+    tanggalLahir : any;
+    jabatan : any;
+    idBackup : any;
+    idStatusKeanggotaan : any;
+    fileBuktiPembayaran : any;
 }
 
 export class Status{

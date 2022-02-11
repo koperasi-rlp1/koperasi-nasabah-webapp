@@ -8,3 +8,13 @@ export class SimpananWajib{
   deskripsi : any;
 
 }
+
+export class SaveWajib{
+
+  jenisTransaksi : any;
+  nominalTransaksi : any;
+  idNasabah : any;
+  buktiPembayaran : any;
+  deskripsi : any;
+  tanggal : any;
+}
