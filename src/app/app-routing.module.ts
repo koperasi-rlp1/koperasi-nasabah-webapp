@@ -50,7 +50,7 @@ const routes: Routes = [
         data: {allowedRoles: ['user']}
       },
       {
-        path: 'forms',
+        path: 'data-nasabah',
         canActivate : [AuthGuardService],
         loadChildren: () => import('./demo/pages/form-elements/form-elements.module').then(m => m.FormElementsModule),
         data: {allowedRoles: ['user']}

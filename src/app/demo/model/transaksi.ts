@@ -13,3 +13,14 @@ export class DataTransaksi{
 
 
 }
+
+export class DataSaldoNasabah{
+  nip : any;
+  namaNasabah : any;
+  saldoWajib : any;
+  saldoSukaRela : any;
+  trWajib : any;
+  trSukaRela : any;
+  saldoAkhir : any;
+  simpananPokok : any;
+}

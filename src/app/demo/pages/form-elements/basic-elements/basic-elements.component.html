@@ -1,101 +1,83 @@
 <div class="row">
   <div class="col-sm-12">
-    <app-card cardTitle="Basic Component" [options]="false">
-      <h5>Form controls</h5>
+    <app-card cardTitle="Saldo Simpanan" [options]="false">
+      <h5>Data Nasabah</h5>
       <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <form action="javascript:">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <form action="javascript:">
-            <div class="form-group">
-              <label>Text</label>
-              <input type="text" class="form-control" placeholder="Text">
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Example select</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Example textarea</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-          </form>
-        </div>
-      </div>
-      <h5 class="mt-5">Sizing</h5>
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <input class="mb-3 form-control form-control-lg" type="text" placeholder=".form-control-lg">
-          <input class="mb-3 form-control" type="text" placeholder="Default input">
-          <input class="mb-3 form-control form-control-sm" type="text" placeholder=".form-control-sm">
-        </div>
-        <div class="col-md-6">
-          <select class="mb-3 form-control form-control-lg">
-            <option>Large select</option>
-          </select>
-          <select class="mb-3 form-control">
-            <option>Default select</option>
-          </select>
-        </div>
-      </div>
-      <h5 class="mt-5">Range Inputs</h5>
-      <hr>
-      <form action="javascript:">
-        <div class="form-group">
-          <label for="formControlRange">Example Range input</label>
-          <input type="range" class="form-control-range" id="formControlRange">
+      <form [formGroup]="formNasabah">
+        <div class="row">
+          <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputEmail1">NIP</label>
+                <input type="text" class="form-control" formControlName="nip" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Nama Nasabah</label>
+                <input type="text" class="form-control" formControlName="namaNasabah" id="exampleInputPassword1" placeholder="" readonly>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputPassword1">Jabatan</label>
+                <input type="text" class="form-control" formControlName="jabatan" id="exampleInputPassword1" placeholder="" readonly>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Unit Operasional</label>
+                <input type="text" class="form-control" formControlName="unitOperasional" id="exampleInputPassword1" placeholder="" readonly>
+              </div>
+          </div>
         </div>
       </form>
+      <h5 class="mt-5">Saldo Simpanan</h5>
+      <hr>
+      <form [formGroup]="formSaldoNasabah">
+        <div class="row">
+            <div class="col-md-6">
+              <label for="exampleInputPassword1">Jumlah Simpanan Wajib</label>
+              <input class="mb-3 form-control form-control-lg" type="text" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" formControlName="saldoWajib" readonly>
+              <label for="exampleInputPassword1">Jumlah Simpanan Suka Rela</label>
+              <input class="mb-3 form-control" type="text" formControlName="saldoSukaRela" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+              <label for="exampleInputPassword1">Jumlah Saldo Simpanan</label>
+              <input class="mb-3 form-control form-control-sm" formControlName="saldoAkhir" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" type="text" readonly>
+            </div>
+            <div class="col-md-6">
+              <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Wajib</label>
+              <input class="mb-3 form-control form-control-lg" formControlName="trWajib" type="text" readonly>
+              <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Suka Rela</label>
+              <input class="mb-3 form-control" type="text" formControlName="trSukaRela" readonly>
+              <label for="exampleInputPassword1">Simpanan Pokok</label>
+              <input class="mb-3 form-control" type="text" formControlName="simpananPokok" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+            </div>
+        </div>
+      </form>
+      <br>
+      <div class="row text-center d-flex justify-content-center" style="width: 100%; margin-left: 0%;">
+        <button class="btn btn-success">Lihat Rincian</button>
+      </div>
+      <h5 class="mt-5">Data Pinjaman Nasabah</h5>
+      <hr>
       <div class="row">
         <div class="col-md-6">
-          <h5 class="mt-5">Readonly</h5>
-          <hr>
-          <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+          <label for="exampleInputPassword1">Jumlah Pinjaman</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
+          <label for="exampleInputPassword1">Pinjaman Selesai</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
+          <label for="exampleInputPassword1">Pinjaman Belum Selesai</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
         </div>
         <div class="col-md-6">
-          <h5 class="mt-5">Readonly plain Text</h5>
-          <hr>
-          <form action="javascript:">
-            <div class="form-group row">
-              <label for="staticEmail" class="col-sm-3 col-form-label">Email</label>
-              <div class="col-sm-9">
-                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
-              <div class="col-sm-9">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-              </div>
-            </div>
-          </form>
+          <label for="exampleInputPassword1">Total Uang Dipinjam</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
+          <label for="exampleInputPassword1">Total Uang Dibayarkan</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
+          <label for="exampleInputPassword1">Sisa Pinjaman Belum DiBayar</label>
+          <input class="mb-3 form-control form-control-lg" type="text" readonly>
         </div>
       </div>
-      <h5 class="mt-5">Inline</h5>
+      <br>
+      <div class="row text-center d-flex justify-content-center" style="width: 100%; margin-left: 0%;">
+        <button class="btn btn-success">Lihat Rincian</button>
+      </div>
+      <!-- <h5 class="mt-5">Inline</h5>
       <hr>
       <form action="javascript:" class="form-inline">
         <div class="form-group mb-2">
@@ -737,7 +719,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </app-card>
   </div>
 </div>

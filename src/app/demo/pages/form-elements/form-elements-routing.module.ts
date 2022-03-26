@@ -6,7 +6,7 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'basic',
+        path: 'beranda',
         loadChildren: () => import('./basic-elements/basic-elements.module').then(m => m.BasicElementsModule)
       }
     ]

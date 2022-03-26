@@ -123,16 +123,16 @@ const NavigationItems = [
     ]
   },
   {
-    id: 'forms',
+    id: 'cek-saldo',
     title: 'Data Analisis',
     type: 'group',
     icon: 'icon-group',
     children: [
       {
         id: 'forms-element',
-        title: 'Cek Saldo',
+        title: 'Data Nasabah',
         type: 'item',
-        url: '/forms/basic',
+        url: '/data-nasabah/beranda',
         classes: 'nav-item',
         icon: 'feather icon-bar-chart'
       }
