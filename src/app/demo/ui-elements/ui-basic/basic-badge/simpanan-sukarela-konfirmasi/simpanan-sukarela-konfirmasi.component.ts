@@ -58,13 +58,16 @@ export class SimpananSukarelaKonfirmasiComponent implements OnInit, OnDestroy {
           });
         });
       },
-      columns: [{
+      columns: [
+        {
         title : 'Nomor Approval',
-        data : 'idApproval'
+        data : 'idApproval',
+        className: 'text-center nopadding'
       },
     {
       title: 'Nominal Transaksi',
-      data : 'nominalTransaksi'
+      data : 'nominalTransaksi',
+      render: $.fn.dataTable.render.number('.', ',', 2, 'Rp ')
     },
     {
       title : 'Tanggal',

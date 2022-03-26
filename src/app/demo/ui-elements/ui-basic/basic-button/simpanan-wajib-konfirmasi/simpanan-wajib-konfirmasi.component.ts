@@ -57,14 +57,17 @@ export class SimpananWajibKonfirmasiComponent implements OnInit, OnDestroy {
           });
         });
       },
-      columns: [{
-        title : 'Nomor Approval',
-        data : 'idApproval'
+      columns: [
+        {
+          title : 'Nomor Approval',
+          data : 'idApproval',
+          className: 'text-center nopadding'
+        },
+      {
+        title: 'Nominal Transaksi',
+        data : 'nominalTransaksi',
+        render: $.fn.dataTable.render.number('.', ',', 2, 'Rp ')
       },
-    {
-      title: 'Nominal Transaksi',
-      data : 'nominalTransaksi'
-    },
     {
       title : 'Tanggal',
       data : 'tanggal'

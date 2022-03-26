@@ -59,7 +59,8 @@ export class BasicBadgeComponent implements OnInit, OnDestroy {
       },
       columns: [{
         title : 'No',
-        data : 'no'
+        data : 'no',
+        className: 'text-center nopadding'
       },
     {
       title: 'Keterangan',
@@ -68,6 +69,11 @@ export class BasicBadgeComponent implements OnInit, OnDestroy {
     {
       title : 'Tanggal',
       data : 'tanggal'
+    },
+    {
+      title : 'Nominal Transaksi',
+      data : 'nominalTransaksi',
+      render: $.fn.dataTable.render.number('.', ',', 2, 'Rp ')
     }
     // ,
     // {
