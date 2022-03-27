@@ -13,6 +13,6 @@ export class DataSaldoService {
   ) { }
 
   public getDataSaldo(nip : any){
-    return this.http.get<DataSaldoNasabah>(`${environment.urlApi}/transaksi//data-saldo/${nip}`, {observe : 'response'});
+    return this.http.get<DataSaldoNasabah>(`${environment.urlApi}/transaksi/data-saldo/${nip}`, {observe : 'response'});
   }
 }

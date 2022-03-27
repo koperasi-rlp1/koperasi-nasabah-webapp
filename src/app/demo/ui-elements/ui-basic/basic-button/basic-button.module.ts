@@ -9,6 +9,7 @@ import {NgbButtonsModule, NgbDropdownModule, NgbTooltipModule} from '@ng-bootstr
 import { DataTablesModule } from 'angular-datatables';
 import { SimpananWajibKonfirmasiComponent } from './simpanan-wajib-konfirmasi/simpanan-wajib-konfirmasi.component';
 import { SimpananWajibTambahComponent } from './simpanan-wajib-tambah/simpanan-wajib-tambah.component';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SimpananWajibTambahComponent } from './simpanan-wajib-tambah/simpanan-w
     NgbButtonsModule,
     NgbTooltipModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxCurrencyModule
   ],
   declarations: [BasicButtonComponent, SimpananWajibKonfirmasiComponent, SimpananWajibTambahComponent]
 })

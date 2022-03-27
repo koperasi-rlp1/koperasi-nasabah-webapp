@@ -9,6 +9,10 @@
             <option *ngFor="let data of bulan" [value]="data">{{data}}</option>
           </select>
         </div>
+        <label for="exampleFormControlTextarea1">Nilai Setoran</label>
+        <div class="input-group mb-3" style="width: 50% !important;">
+          <input  onpaste="return false;" type="text" class="form-control" formControlName="nominalTransaksi" aria-label="Amount (to the nearest dollar)" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+        </div>
         <label for="exampleFormControlTextarea1">Bukti Pembayaran</label>
         <small id="emailHelp" class="form-text text-muted">kirim file gambar bukti pembayaran berupa foto ataupun screenshoot dari media.</small>
         <div class="input-group cust-file-button mb-5"  style="width: 50% !important;">

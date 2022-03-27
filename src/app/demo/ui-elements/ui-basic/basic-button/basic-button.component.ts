@@ -62,6 +62,11 @@ export class BasicButtonComponent implements OnInit, OnDestroy {
         data : 'no',
         className: 'text-center nopadding'
       },
+      {
+        title : 'Nomor Transaksi',
+        data : 'noTransaksi',
+        className: 'text-center nopadding'
+      },
     {
       title: 'Keterangan',
       data : 'deskripsi'

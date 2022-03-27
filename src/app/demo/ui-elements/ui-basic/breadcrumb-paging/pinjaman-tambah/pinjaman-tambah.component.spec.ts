@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BreadcrumbPagingComponent } from './breadcrumb-paging.component';
+import { PinjamanTambahComponent } from './pinjaman-tambah.component';
 
-describe('BreadcrumbPagingComponent', () => {
-  let component: BreadcrumbPagingComponent;
-  let fixture: ComponentFixture<BreadcrumbPagingComponent>;
+describe('PinjamanTambahComponent', () => {
+  let component: PinjamanTambahComponent;
+  let fixture: ComponentFixture<PinjamanTambahComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BreadcrumbPagingComponent ]
+      declarations: [ PinjamanTambahComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BreadcrumbPagingComponent);
+    fixture = TestBed.createComponent(PinjamanTambahComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

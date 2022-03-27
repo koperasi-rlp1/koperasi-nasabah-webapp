@@ -98,7 +98,27 @@ const NavigationItems = [
             id: 'breadcrumb-pagination',
             title: 'Pinjaman',
             type: 'item',
-            url: '/transaksi/pinjaman'
+            url: '/transaksi/pinjaman',
+            children:[
+              {
+                id: 'Tambah',
+                title: 'Tambah',
+                type: 'anak',
+                url: '/transaksi/pinjaman/tambah'
+              },
+              {
+                id: 'Tambah',
+                title: 'Menunggu Korfirmasi',
+                type: 'anak',
+                url: '/transaksi/pinjaman/menunggu-konfirmasi'
+              },
+              {
+                id: 'Tambah',
+                title: 'Tolak',
+                type: 'anak',
+                url: '/transaksi/pinjaman/tolak'
+              }
+            ]
           }
           // {
           //   id: 'collapse',
