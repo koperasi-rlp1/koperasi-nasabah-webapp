@@ -15,4 +15,8 @@ export class DataSaldoService {
   public getDataSaldo(nip : any){
     return this.http.get<DataSaldoNasabah>(`${environment.urlApi}/transaksi/data-saldo/${nip}`, {observe : 'response'});
   }
+
+  public getDataPinjaman(nip : any){
+    return this.http.get<any>(`${environment.urlApi}/transaksi/data-pinjaman/${nip}`, {observe : 'response'});
+  }
 }

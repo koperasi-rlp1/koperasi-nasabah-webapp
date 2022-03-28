@@ -3,12 +3,18 @@
     <app-card cardTitle="Pinjaman" [options]="false" *ngIf="pages == 'checking'">
       <button type="button" class="btn btn-success" (click)="checkAkun()">Cek Akun</button>
     </app-card>
-    <app-card cardTitle="Options" [options]="false">
+    <app-card cardTitle="Options" [options]="false" *ngIf="pages == 'checked'">
       <button type="button" class="btn btn-primary" routerLink="menunggu-konfirmasi">Transaksi Belum Terkonfirmasi</button>
       <button type="button" class="btn btn-success" routerLink="tambah"><i class="feather icon-plus"></i>Tambah</button>
       <button type="button" class="btn btn-danger" routerLink="tolak">Pinjaman Ditolak</button>
     </app-card>
-    <app-card cardTitle="Data Pinjaman" [options]="false">
+    <app-card cardTitle="Data Pinjaman" [options]="false" *ngIf="pages == 'checked'">
+      <section>
+        <div class="table-responsive">
+            <table datatable [dtOptions]="dtOptions" class="cards table table-sm table-hover" style="width: 100%;">
+            </table>
+        </div>
+      </section>
     </app-card>
   </div>
 </div>

@@ -6,24 +6,28 @@
       <form [formGroup]="formNasabah">
         <div class="row">
           <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputEmail1">NIP</label>
-                <input type="text" class="form-control" formControlName="nip" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" readonly>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Nama Nasabah</label>
-                <input type="text" class="form-control" formControlName="namaNasabah" id="exampleInputPassword1" placeholder="" readonly>
-              </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">NIP</label>
+              <input type="text" class="form-control" formControlName="nip" id="exampleInputEmail1"
+                aria-describedby="emailHelp" placeholder="" readonly>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Nama Nasabah</label>
+              <input type="text" class="form-control" formControlName="namaNasabah" id="exampleInputPassword1"
+                placeholder="" readonly>
+            </div>
           </div>
           <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputPassword1">Jabatan</label>
-                <input type="text" class="form-control" formControlName="jabatan" id="exampleInputPassword1" placeholder="" readonly>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Unit Operasional</label>
-                <input type="text" class="form-control" formControlName="unitOperasional" id="exampleInputPassword1" placeholder="" readonly>
-              </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Jabatan</label>
+              <input type="text" class="form-control" formControlName="jabatan" id="exampleInputPassword1"
+                placeholder="" readonly>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Unit Operasional</label>
+              <input type="text" class="form-control" formControlName="unitOperasional" id="exampleInputPassword1"
+                placeholder="" readonly>
+            </div>
           </div>
         </div>
       </form>
@@ -31,22 +35,26 @@
       <hr>
       <form [formGroup]="formSaldoNasabah">
         <div class="row">
-            <div class="col-md-6">
-              <label for="exampleInputPassword1">Jumlah Simpanan Wajib</label>
-              <input class="mb-3 form-control form-control-lg" type="text" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" formControlName="saldoWajib" readonly>
-              <label for="exampleInputPassword1">Jumlah Simpanan Suka Rela</label>
-              <input class="mb-3 form-control" type="text" formControlName="saldoSukaRela" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
-              <label for="exampleInputPassword1">Jumlah Saldo Simpanan</label>
-              <input class="mb-3 form-control form-control-sm" formControlName="saldoAkhir" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" type="text" readonly>
-            </div>
-            <div class="col-md-6">
-              <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Wajib</label>
-              <input class="mb-3 form-control form-control-lg" formControlName="trWajib" type="text" readonly>
-              <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Suka Rela</label>
-              <input class="mb-3 form-control" type="text" formControlName="trSukaRela" readonly>
-              <label for="exampleInputPassword1">Simpanan Pokok</label>
-              <input class="mb-3 form-control" type="text" formControlName="simpananPokok" currencyMask [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
-            </div>
+          <div class="col-md-6">
+            <label for="exampleInputPassword1">Jumlah Simpanan Wajib</label>
+            <input class="mb-3 form-control form-control-lg" type="text" currencyMask
+              [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" formControlName="saldoWajib" readonly>
+            <label for="exampleInputPassword1">Jumlah Simpanan Suka Rela</label>
+            <input class="mb-3 form-control" type="text" formControlName="saldoSukaRela" currencyMask
+              [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+            <label for="exampleInputPassword1">Jumlah Saldo Simpanan</label>
+            <input class="mb-3 form-control form-control-sm" formControlName="saldoAkhir" currencyMask
+              [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" type="text" readonly>
+          </div>
+          <div class="col-md-6">
+            <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Wajib</label>
+            <input class="mb-3 form-control form-control-lg" formControlName="trWajib" type="text" readonly>
+            <label for="exampleInputPassword1">Jumlah Transaksi Simpanan Suka Rela</label>
+            <input class="mb-3 form-control" type="text" formControlName="trSukaRela" readonly>
+            <label for="exampleInputPassword1">Simpanan Pokok</label>
+            <input class="mb-3 form-control" type="text" formControlName="simpananPokok" currencyMask
+              [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+          </div>
         </div>
       </form>
       <br>
@@ -55,24 +63,29 @@
       </div>
       <h5 class="mt-5">Data Pinjaman Nasabah</h5>
       <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <label for="exampleInputPassword1">Jumlah Pinjaman</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
-          <label for="exampleInputPassword1">Pinjaman Selesai</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
-          <label for="exampleInputPassword1">Pinjaman Belum Selesai</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
+      <form [formGroup]="formPinjamanNasabah">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="exampleInputPassword1">Jumlah Pinjaman</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="jumlahPinjaman" readonly>
+            <label for="exampleInputPassword1">Pinjaman Selesai</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="pinjamanSelesai" readonly>
+            <label for="exampleInputPassword1">Pinjaman Belum Selesai</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="pinjamanBelumSelesai" readonly>
+          </div>
+          <div class="col-md-6">
+            <label for="exampleInputPassword1">Total Uang Dipinjam</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="totalUangPinjam" currencyMask
+            [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+            <label for="exampleInputPassword1">Total Uang Dibayarkan</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="totalUangBayar" currencyMask
+            [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+            <label for="exampleInputPassword1">Sisa Pinjaman Belum DiBayar</label>
+            <input class="mb-3 form-control form-control-lg" type="text" formControlName="sisaPinjamBelumBayar" currencyMask
+            [options]="{ prefix: 'Rp ', thousands: '.', decimal: ',' }" readonly>
+          </div>
         </div>
-        <div class="col-md-6">
-          <label for="exampleInputPassword1">Total Uang Dipinjam</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
-          <label for="exampleInputPassword1">Total Uang Dibayarkan</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
-          <label for="exampleInputPassword1">Sisa Pinjaman Belum DiBayar</label>
-          <input class="mb-3 form-control form-control-lg" type="text" readonly>
-        </div>
-      </div>
+      </form>
       <br>
       <div class="row text-center d-flex justify-content-center" style="width: 100%; margin-left: 0%;">
         <button class="btn btn-success">Lihat Rincian</button>
