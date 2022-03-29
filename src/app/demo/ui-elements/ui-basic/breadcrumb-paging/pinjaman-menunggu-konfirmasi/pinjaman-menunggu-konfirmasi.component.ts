@@ -49,7 +49,7 @@ export class PinjamanMenungguKonfirmasiComponent implements OnInit, OnDestroy {
       columns: [
         {
           title: 'Nomor Approval',
-          data: 'idApproval',
+          data: 'id',
           className: 'text-center nopadding'
         },
         {
