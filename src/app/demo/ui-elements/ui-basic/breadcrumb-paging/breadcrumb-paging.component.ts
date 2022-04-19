@@ -69,7 +69,7 @@ export class BreadcrumbPagingComponent implements OnInit, OnDestroy {
           const value = JSON.parse(localStorage.getItem("currentLogin"));
           dataParam.idNasabah = value.idBackup;
           dataTablesParameters.extraParam = dataParam;
-          this.service.datatablesTolak(dataTablesParameters).subscribe(resp => {
+          this.service.datatables(dataTablesParameters).subscribe(resp => {
             callback({
               recordsTotal: resp.recordTotal,
               recordsFiltered: resp.recordFiltered,
@@ -91,7 +91,7 @@ export class BreadcrumbPagingComponent implements OnInit, OnDestroy {
           },
           {
             title: 'Sisa Pinjaman',
-            data: 'sisaPinjaman',
+            data: 'sisaPinjaan',
             render: $.fn.dataTable.render.number('.', ',', 2, 'Rp ')
           },
           {
